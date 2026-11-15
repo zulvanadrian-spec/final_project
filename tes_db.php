@@ -10,20 +10,7 @@ use pbo_FP\Models\Mahasiswa;
 $db = Database::getConnection();
 echo "Konek ke database<br>";
 
-// (A) insert data dummy, jalanin SEKALI aja lalu komen bagian ini
-
-// 1) insert ke user
-$stmt = $db->prepare("INSERT INTO user (nama_user, email, password) VALUES (?, ?, ?)");
-$stmt->execute(["Zulvan", "zulvan@gmail.com", User::hashPassword("rahasia123")]);
-
-// 2) ambil id_user yang barusan dibikin MySQL
-$id_user = $db->lastInsertId();
-
-// 3) insert ke mahasiswa, pakai id_user tadi
-$stmt = $db->prepare("INSERT INTO mahasiswa (id_user, nim) VALUES (?, ?)");
-$stmt->execute([$id_user, "25416255201061"]);
-
-// (B) ambil dari database, bikin jadi objek
+// (A) ambil dari database, bikin jadi objek
 $stmt = $db->prepare(
     "SELECT u.id_user, u.nama_user, u.email, u.password, m.id_mahasiswa, m.nim
      FROM user u
@@ -42,5 +29,5 @@ $mhs = new Mahasiswa(
     $row['nim']
 );
 
-echo $mhs->getNama() . "<br>";
+echo $mhs->getNamaUser() . "<br>";
 var_dump($mhs->verifyPassword("rahasia123"));   // bool(true)
