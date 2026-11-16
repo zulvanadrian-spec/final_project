@@ -17,7 +17,8 @@ if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'mahasiswa') {
 <body>
     <h1>Selamat datang, <?= htmlspecialchars($_SESSION['nama_user']) ?>!</h1>
     <p>Ini adalah halaman Dashboard khusus Mahasiswa.</p>
-    
+    <p>zulpan jelek</p>
     <a href="login.php">Logout</a>
+    <br><a href="events.php">Lihat Event</a>
 </body>
 </html>

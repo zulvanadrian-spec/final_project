@@ -1,6 +1,7 @@
 <?php
 
 namespace pbo_FP\Models;
+use pbo_FP\Core\Database;
 
 class Event {
     private $id_event;
@@ -32,4 +33,18 @@ class Event {
     public function getStatusEvent(){
         return $this->status_event;
     }
+    
+    public static function semua() {
+    $db = Database::getConnection();
+    $stmt = $db->query("SELECT * FROM event ORDER BY tanggal_event ASC");
+
+    $hasil = [];
+    foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+        $hasil[] = new Event(
+            $row['id_event'], $row['id_panitia'], $row['nama_event'],
+            $row['tanggal_event'], $row['status_event']
+        );
+    }
+    return $hasil;
+}
 }
