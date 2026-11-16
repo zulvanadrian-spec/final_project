@@ -1,6 +1,7 @@
 <?php
 
 namespace pbo_FP\Models;
+use pbo_FP\Core\Database;
 
 class User {
     protected $id_user;
@@ -33,9 +34,29 @@ class User {
         return $this->email;
     }
 
+    public function getIdUser() {
+    return $this->id_user;
+    }
+
     // password sengaja TIDAK dikasih getter biasa
     public function verifyPassword($input) {
         return password_verify($input, $this->password);
+    }
+
+    public static function autentikasi($email, $password) {
+    $db = Database::getConnection();
+
+    $stmt = $db->prepare("SELECT * FROM user WHERE email = ?");
+    $stmt->execute([$email]);
+    $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+    if (!$row) {
+        return null;
+    }
+
+    $user = new User($row['id_user'], $row['nama_user'], $row['email'], $row['password']);
+
+    return $user->verifyPassword($password) ? $user : null;
     }
 
     public static function hashPassword($plain) {
