@@ -1,6 +1,7 @@
 <?php
 
 namespace pbo_FP\Models;
+use pbo_FP\Core\Database;
 
 class Divisi {
     private $id_divisi;
@@ -28,4 +29,16 @@ class Divisi {
     public function getkuota(){
         return $this->kuota;
     }
+
+    public static function byEvent($id_event) {
+    $db = Database::getConnection();
+    $stmt = $db->prepare("SELECT * FROM divisi WHERE id_event = ? ORDER BY nama_divisi");
+    $stmt->execute([$id_event]);
+
+    $hasil = [];
+    foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+        $hasil[] = new Divisi($row['id_divisi'], $row['id_event'], $row['nama_divisi'], $row['kuota']);
+    }
+    return $hasil;
+}
 }
