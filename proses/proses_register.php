@@ -40,7 +40,14 @@ if (strlen($password) < 6) {
 
 $db = Database::getConnection();
 
-// (4) cek email belum kepakai
+// (4) cek email dan nim belum kepakai
+$stmt = $db->prepare("SELECT id_mahasiswa FROM mahasiswa WHERE nim = ?");
+$stmt->execute([$nim]);
+
+if ($stmt->fetch()) {
+    kembali('register.php', 'error', 'NIM sudah terdaftar.');
+}
+
 $stmt = $db->prepare("SELECT id_user FROM user WHERE email = ?");
 $stmt->execute([$email]);
 
