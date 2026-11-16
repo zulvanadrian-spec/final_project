@@ -15,7 +15,7 @@ function kembali($tujuan, $kunci, $pesan) {
 
 // (1) hanya terima request POST (bukan dibuka langsung lewat URL)
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: ../pages/register.php");
+    header("Location: ../pages/login.php");
     exit;
 }
 
