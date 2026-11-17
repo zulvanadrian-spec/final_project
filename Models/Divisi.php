@@ -31,14 +31,46 @@ class Divisi {
     }
 
     public static function byEvent($id_event) {
-    $db = Database::getConnection();
-    $stmt = $db->prepare("SELECT * FROM divisi WHERE id_event = ? ORDER BY nama_divisi");
-    $stmt->execute([$id_event]);
+        $db = Database::getConnection();
+        $stmt = $db->prepare("SELECT * FROM divisi WHERE id_event = ? ORDER BY nama_divisi");
+        $stmt->execute([$id_event]);
 
-    $hasil = [];
-    foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row) {
-        $hasil[] = new Divisi($row['id_divisi'], $row['id_event'], $row['nama_divisi'], $row['kuota']);
+        $hasil = [];
+        foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+            $hasil[] = new Divisi($row['id_divisi'], $row['id_event'], $row['nama_divisi'], $row['kuota']);
+        }
+        return $hasil;
     }
-    return $hasil;
+
+    public static function milikPanitiaIni($id_divisi, $id_user) {
+    $db = Database::getConnection();
+    $stmt = $db->prepare(
+        "SELECT 1 FROM divisi d
+         JOIN event e ON e.id_event = d.id_event
+         JOIN panitia p ON p.id_panitia = e.id_panitia
+         WHERE d.id_divisi = ? AND p.id_user = ?"
+    );
+    $stmt->execute([$id_divisi, $id_user]);
+    return (bool) $stmt->fetchColumn();
 }
+
+public static function tambahDivisi($id_event, $id_user, $nama_divisi, $kuota) {
+    if (!Event::milikPanitiaIni($id_event, $id_user)) {
+        return false;
+    }
+    $db = Database::getConnection();
+    $stmt = $db->prepare("INSERT INTO divisi (id_event, nama_divisi, kuota) VALUES (?, ?, ?)");
+    $stmt->execute([$id_event, $nama_divisi, $kuota]);
+    return true;
+}
+
+    public static function ubahDivisi($id_divisi, $id_user, $nama_divisi, $kuota) {
+        if (!self::milikPanitiaIni($id_divisi, $id_user)) {
+            return false;
+        }
+        $db = Database::getConnection();
+        $stmt = $db->prepare("UPDATE divisi SET nama_divisi = ?, kuota = ? WHERE id_divisi = ?");
+        $stmt->execute([$nama_divisi, $kuota, $id_divisi]);
+        return true;
+    }
 }
