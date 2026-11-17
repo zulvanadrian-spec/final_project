@@ -23,3 +23,6 @@ $dataMahasiswa = Mahasiswa::cari($keyword);
         </tr>
     <?php endforeach; ?>
 </table>
+
+<br><a href="kelola_akun.php">Kelola Akun</a>
+<br><a href="../proses/logout.php">Logout</a>
