@@ -93,4 +93,35 @@ class Event {
         $stmt->execute([$nama_event, $tanggal_event, $status_event, $id_user]);
         return $stmt->rowCount() > 0;
         }
+
+    public static function milikPanitiaIni($id_event, $id_user) {
+        $db = Database::getConnection();
+        $stmt = $db->prepare(
+            "SELECT 1 FROM event e
+            JOIN panitia p ON p.id_panitia = e.id_panitia
+            WHERE e.id_event = ? AND p.id_user = ?"
+        );
+        $stmt->execute([$id_event, $id_user]);
+        return (bool) $stmt->fetchColumn();
     }
+
+    public static function ubahEvent($id_event, $id_user, $nama_event, $tanggal_event, $status_event) {
+        if (!self::milikPanitiaIni($id_event, $id_user)) {
+            return false;
+        }
+        $db = Database::getConnection();
+        $stmt = $db->prepare("UPDATE event SET nama_event = ?, tanggal_event = ?, status_event = ? WHERE id_event = ?");
+        $stmt->execute([$nama_event, $tanggal_event, $status_event, $id_event]);
+        return true;
+    }
+
+    public static function hapusEvent($id_event, $id_user) {
+        if (!self::milikPanitiaIni($id_event, $id_user)) {
+            return false;
+        }
+        $db = Database::getConnection();
+        $stmt = $db->prepare("DELETE FROM event WHERE id_event = ?");
+        $stmt->execute([$id_event]);
+        return true;
+    }
+}

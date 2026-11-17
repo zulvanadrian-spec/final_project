@@ -37,13 +37,23 @@ unset($_SESSION['error'], $_SESSION['sukses']);
 
 <h3>Event Saya</h3>
 <table border="1" cellpadding="6">
-    <tr><th>Nama</th><th>Tanggal</th><th>Status</th></tr>
+    <tr><th>Nama</th><th>Tanggal</th><th>Status</th></tr><th>Aksi</th>
     <?php foreach ($daftarEvent as $e) { ?>
     <tr>
         <td><?= htmlspecialchars($e->getNamaEvent()) ?></td>
         <td><?= htmlspecialchars($e->getTanggalEvent()) ?></td>
         <td><?= htmlspecialchars($e->getStatusEvent()) ?></td>
+        <td>
+            <a href="edit_event.php?id=<?= (int) $e->getIdEvent() ?>">Ubah</a>
+            <form action="../proses/proses_event.php" method="POST" style="display:inline"
+                    onsubmit="return confirm('Hapus event ini?')">
+                <input type="hidden" name="aksi" value="hapus">
+                <input type="hidden" name="id_event" value="<?= (int) $e->getIdEvent() ?>">
+                <button type="submit">Hapus</button>
+            </form>
+        </td>
     </tr>
+    
     <?php } ?>
 </table>
 
