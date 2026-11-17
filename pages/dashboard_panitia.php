@@ -18,5 +18,6 @@ if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'panitia') {
     <p>Ini adalah halaman Dashboard khusus Panitia.</p>
 
     <br><a href="pendaftar.php">Lihat Pendaftar</a>
+    <br><a href="kelola_event.php">Kelola Event</a>
     <br><a href="../proses/logout.php">Logout</a>
 </body>
