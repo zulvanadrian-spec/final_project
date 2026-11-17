@@ -26,21 +26,21 @@ $daftarStatus = Pendaftaran::untukMahasiswa($_SESSION['id_user']);
 
     <h3>Status Pendaftaran Saya</h3>
 
-<?php if (empty($daftarStatus)) { ?>
-    <p>Belum ada pendaftaran.</p>
-    <?php } else { ?>
-    <table border="1" cellpadding="6">
-        <tr><th>Event</th><th>Divisi</th><th>Tanggal Daftar</th><th>Status</th><th>Catatan</th></tr>
-        <?php foreach ($daftarStatus as $s) { ?>
-        <tr>
-            <td><?= htmlspecialchars($s['nama_event']) ?></td>
-            <td><?= htmlspecialchars($s['nama_divisi']) ?></td>
-            <td><?= htmlspecialchars($s['tanggal_pendaftaran']) ?></td>
-            <td><?= htmlspecialchars($s['status_pendaftaran']) ?></td>
-            <td><?= htmlspecialchars($s['catatan'] ?? '-') ?></td>
-        </tr>
-        <?php } ?>
-    </table>
+    <?php if (empty($daftarStatus)) { ?>
+        <p>Belum ada pendaftaran.</p>
+        <?php } else { ?>
+        <table border="1" cellpadding="6">
+            <tr><th>Event</th><th>Divisi</th><th>Tanggal Daftar</th><th>Status</th><th>Catatan</th></tr>
+            <?php foreach ($daftarStatus as $s) { ?>
+            <tr>
+                <td><?= htmlspecialchars($s['nama_event']) ?></td>
+                <td><?= htmlspecialchars($s['nama_divisi']) ?></td>
+                <td><?= htmlspecialchars($s['tanggal_pendaftaran']) ?></td>
+                <td><?= htmlspecialchars($s['status_pendaftaran']) ?></td>
+                <td><?= htmlspecialchars($s['catatan'] ?? '-') ?></td>
+            </tr>
+            <?php } ?>
+        </table>
     <?php } ?>
     
     <br><a href="events.php">Lihat Event</a>

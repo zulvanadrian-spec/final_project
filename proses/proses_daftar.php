@@ -29,13 +29,22 @@ $stmt = $db->prepare("SELECT id_mahasiswa FROM mahasiswa WHERE id_user = ?");
 $stmt->execute([$_SESSION['id_user']]);
 $id_mahasiswa = $stmt->fetchColumn();
 
-// (2) divisi harus ada, ambil kuotanya
-$stmt = $db->prepare("SELECT id_event, kuota FROM divisi WHERE id_divisi = ?");
+// (2) divisi harus ada, ambil kuota dan status event-nya
+$stmt = $db->prepare(
+    "SELECT d.id_event, d.kuota, e.status_event
+     FROM divisi d
+     JOIN event e ON e.id_event = d.id_event
+     WHERE d.id_divisi = ?"
+);
 $stmt->execute([$id_divisi]);
 $divisi = $stmt->fetch(\PDO::FETCH_ASSOC);
 
 if (!$id_mahasiswa || !$divisi) {
     kembali($id_event, 'error', 'Data tidak valid.');
+}
+
+if ($divisi['status_event'] !== 'open_recruitment') {
+    kembali($divisi['id_event'], 'error', 'Pendaftaran untuk event ini belum dibuka atau sudah ditutup.');
 }
 
 // (3) cek kuota (yang ditolak nggak dihitung)
