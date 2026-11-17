@@ -45,6 +45,7 @@ unset($_SESSION['error'], $_SESSION['sukses']);
         <td><?= htmlspecialchars($e->getStatusEvent()) ?></td>
         <td>
             <a href="edit_event.php?id=<?= (int) $e->getIdEvent() ?>">Ubah</a>
+            <a href="kelola_divisi.php?id=<?= (int) $e->getIdEvent() ?>">Divisi</a>
             <form action="../proses/proses_event.php" method="POST" style="display:inline"
                     onsubmit="return confirm('Hapus event ini?')">
                 <input type="hidden" name="aksi" value="hapus">
