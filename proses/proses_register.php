@@ -25,8 +25,14 @@ $email     = trim($_POST['email'] ?? '');
 $nim       = trim($_POST['nim'] ?? '');
 $password  = $_POST['password'] ?? '';
 
+$role = $_POST['role'] ?? 'mahasiswa';
+
+if (!in_array($role, ['mahasiswa', 'panitia'], true)) {
+    kembali('register.php', 'error', 'Pilihan peran tidak valid.');
+}
+
 // (3) validasi
-if ($nama_user === '' || $email === '' || $nim === '' || $password === '') {
+if ($nama_user === '' || $email === '' || $password === '' || ($role === 'mahasiswa' && $nim === '')) {
     kembali('register.php', 'error', 'Semua field wajib diisi.');
 }
 
@@ -64,8 +70,13 @@ try {
 
     $id_user = $db->lastInsertId();
 
-    $stmt = $db->prepare("INSERT INTO mahasiswa (id_user, nim) VALUES (?, ?)");
-    $stmt->execute([$id_user, $nim]);
+    if ($role === 'mahasiswa') {
+        $stmt = $db->prepare("INSERT INTO mahasiswa (id_user, nim) VALUES (?, ?)");
+        $stmt->execute([$id_user, $nim]);
+    } else {
+        $stmt = $db->prepare("INSERT INTO pengajuan_panitia (id_user) VALUES (?)");
+        $stmt->execute([$id_user]);
+    }
 
     $db->commit();
 } catch (Exception $e) {
@@ -74,4 +85,7 @@ try {
 }
 
 // (6) sukses -> ke halaman login
-kembali('login.php', 'sukses', 'Akun berhasil dibuat, silakan login.');
+$pesan = $role === 'panitia'
+    ? 'Pengajuan akun panitia terkirim. Tunggu persetujuan admin sebelum login.'
+    : 'Akun berhasil dibuat, silakan login.';
+kembali('login.php', 'sukses', $pesan);
