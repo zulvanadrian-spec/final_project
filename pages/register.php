@@ -28,8 +28,14 @@ unset($_SESSION['error']);
         <label>Email</label><br>
         <input type="email" name="email" required><br><br>
 
+        <label>Daftar sebagai</label><br>
+        <select name="role">
+            <option value="mahasiswa">Mahasiswa</option>
+            <option value="panitia">Panitia (perlu persetujuan admin)</option>
+        </select><br><br>
+
         <label>NIM</label><br>
-        <input type="text" name="nim" required><br><br>
+        <input type="text" name="nim" ><br><br>
 
         <label>Password</label><br>
         <input type="password" name="password" required><br><br>
