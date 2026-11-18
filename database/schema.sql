@@ -291,6 +291,20 @@ ALTER TABLE `review`
   ADD CONSTRAINT `fk_review_pendaftaran` FOREIGN KEY (`id_pendaftaran`) REFERENCES `pendaftaran` (`id_pendaftaran`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pengajuan_panitia`
+--
+
+CREATE TABLE `pengajuan_panitia` (
+  `id_pengajuan` INT AUTO_INCREMENT PRIMARY KEY,
+  `id_user` INT NOT NULL UNIQUE,
+  `status_pengajuan` VARCHAR(30) NOT NULL DEFAULT 'menunggu',
+  `tanggal_pengajuan` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT `fk_pengajuan_user` FOREIGN KEY (id_user) REFERENCES user(id_user) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
