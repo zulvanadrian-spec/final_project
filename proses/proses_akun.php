@@ -55,4 +55,18 @@ if ($aksi === 'jadikan_panitia') {
     kembali('error', 'Akun tidak ditemukan atau bukan mahasiswa.');
 }
 
+if ($aksi === 'putuskan_pengajuan') {
+    $id_pengajuan = (int) ($_POST['id_pengajuan'] ?? 0);
+    $keputusan    = $_POST['keputusan'] ?? '';
+
+    if (!in_array($keputusan, ['disetujui', 'ditolak'], true)) {
+        kembali('error', 'Keputusan tidak valid.');
+    }
+
+    if (Admin::putuskanPengajuan($id_pengajuan, $keputusan)) {
+        kembali('sukses', 'Pengajuan berhasil ' . $keputusan . '.');
+    }
+    kembali('error', 'Pengajuan tidak ditemukan atau sudah diputuskan.');
+}
+
 kembali('error', 'Aksi tidak dikenal.');
