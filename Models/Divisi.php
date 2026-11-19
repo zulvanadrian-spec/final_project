@@ -42,12 +42,12 @@ class Divisi {
         return $hasil;
     }
 
-    public static function milikPanitiaIni($id_divisi, $id_user) {
+    public static function milikRekruterIni($id_divisi, $id_user) {
     $db = Database::getConnection();
     $stmt = $db->prepare(
         "SELECT 1 FROM divisi d
          JOIN event e ON e.id_event = d.id_event
-         JOIN panitia p ON p.id_panitia = e.id_panitia
+         JOIN rekruter p ON p.id_rekruter = e.id_rekruter
          WHERE d.id_divisi = ? AND p.id_user = ?"
     );
     $stmt->execute([$id_divisi, $id_user]);
@@ -55,7 +55,7 @@ class Divisi {
 }
 
 public static function tambahDivisi($id_event, $id_user, $nama_divisi, $kuota) {
-    if (!Event::milikPanitiaIni($id_event, $id_user)) {
+    if (!Event::milikRekruterIni($id_event, $id_user)) {
         return false;
     }
     $db = Database::getConnection();
@@ -65,7 +65,7 @@ public static function tambahDivisi($id_event, $id_user, $nama_divisi, $kuota) {
 }
 
     public static function ubahDivisi($id_divisi, $id_user, $nama_divisi, $kuota) {
-        if (!self::milikPanitiaIni($id_divisi, $id_user)) {
+        if (!self::milikRekruterIni($id_divisi, $id_user)) {
             return false;
         }
         $db = Database::getConnection();

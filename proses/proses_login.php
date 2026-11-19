@@ -51,7 +51,7 @@ if (!$user->verifyPassword($password)) {
     kembali('login.php', 'error', 'Password salah.');
 }
 
-// 6. Cek Role (Mahasiswa, Admin, atau Panitia) dengan ngecek ke tabel masing-masing
+// 6. Cek Role (Mahasiswa, Admin, atau Rekruter) dengan ngecek ke tabel masing-masing
 $role = '';
 
 // Cek di tabel mahasiswa
@@ -70,12 +70,12 @@ if ($role === '') {
     }
 }
 
-// Cek di tabel panitia (kalau bukan admin & mahasiswa)
+// Cek di tabel rekruter (kalau bukan admin & mahasiswa)
 if ($role === '') {
-    $stmtPanitia = $db->prepare("SELECT id_panitia FROM panitia WHERE id_user = ?");
-    $stmtPanitia->execute([$userData['id_user']]);
-    if ($stmtPanitia->fetch()) {
-        $role = 'panitia';
+    $stmtRekruter = $db->prepare("SELECT id_rekruter FROM rekruter WHERE id_user = ?");
+    $stmtRekruter->execute([$userData['id_user']]);
+    if ($stmtRekruter->fetch()) {
+        $role = 'rekruter';
     }
 }
 
@@ -89,8 +89,8 @@ if ($role === 'mahasiswa') {
     header("Location: ../pages/dashboard_mahasiswa.php");
 } elseif ($role === 'admin') {
     header("Location: ../pages/dashboard_admin.php");
-} elseif ($role === 'panitia') {
-    header("Location: ../pages/dashboard_panitia.php");
+} elseif ($role === 'rekruter') {
+    header("Location: ../pages/dashboard_rekruter.php");
 } else {
     // Jaga-jaga kalau akunnya ngambang (ada di tabel user tapi gak ada di 3 role itu)
     kembali('login.php', 'error', 'Akun tidak memiliki role yang valid.');

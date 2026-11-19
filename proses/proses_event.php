@@ -24,7 +24,7 @@ function validasiEvent($nama, $tanggal, $status) {
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST'
     || !isset($_SESSION['id_user'])
-    || ($_SESSION['role'] ?? '') !== 'panitia') {
+    || ($_SESSION['role'] ?? '') !== 'rekruter') {
     header("Location: ../pages/login.php");
     exit;
 }

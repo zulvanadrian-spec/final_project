@@ -42,7 +42,7 @@ echo $daftar->getStatusPendaftaran() . "<br>";   // diterima
 $rev = new Review(
     1,            // id_review
     1,            // id_pendaftaran
-    1,            // id_panitia
+    1,            // id_rekruter
     "diterima",   // keputusan
     "Aktif dan komunikatif",    // catatan
     "2026-11-02 14:30:00"       // waktu_review

@@ -6,14 +6,14 @@ use pbo_FP\Core\Database;
 
 class Event {
     private $id_event;
-    private $id_panitia;
+    private $id_rekruter;
     private $nama_event;
     private $tanggal_event;
     private $status_event;
 
-    public function __construct($id_event, $id_panitia, $nama_event, $tanggal_event, $status_event) {
+    public function __construct($id_event, $id_rekruter, $nama_event, $tanggal_event, $status_event) {
         $this->id_event = $id_event;
-        $this->id_panitia = $id_panitia;
+        $this->id_rekruter = $id_rekruter;
         $this->nama_event = $nama_event;
         $this->tanggal_event = $tanggal_event;
         $this->status_event = $status_event;
@@ -22,8 +22,8 @@ class Event {
     public function getIdEvent(){
         return $this->id_event;
     }
-    public function getIdPanitia(){
-        return $this->id_panitia;
+    public function getIdRekruter(){
+        return $this->id_rekruter;
     }
     public function getNamaEvent(){
         return $this->nama_event;
@@ -42,7 +42,7 @@ class Event {
         $hasil = [];
         foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row) {
             $hasil[] = new Event(
-                $row['id_event'], $row['id_panitia'], $row['nama_event'],
+                $row['id_event'], $row['id_rekruter'], $row['nama_event'],
                 $row['tanggal_event'], $row['status_event']
             );
         }
@@ -59,16 +59,16 @@ class Event {
             return null;
     }
     return new Event(
-        $row['id_event'], $row['id_panitia'], $row['nama_event'],
+        $row['id_event'], $row['id_rekruter'], $row['nama_event'],
         $row['tanggal_event'], $row['status_event']
         );
     }
 
-    public static function milikPanitia($id_user) {
+    public static function milikRekruter($id_user) {
         $db = Database::getConnection();
         $stmt = $db->prepare(
             "SELECT e.* FROM event e
-            JOIN panitia p ON p.id_panitia = e.id_panitia
+            JOIN rekruter p ON p.id_rekruter = e.id_rekruter
             WHERE p.id_user = ?
             ORDER BY e.tanggal_event ASC"
         );
@@ -77,7 +77,7 @@ class Event {
         $hasil = [];
         foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row) {
             $hasil[] = new Event(
-                $row['id_event'], $row['id_panitia'], $row['nama_event'],
+                $row['id_event'], $row['id_rekruter'], $row['nama_event'],
                 $row['tanggal_event'], $row['status_event']
             );
         }
@@ -87,18 +87,18 @@ class Event {
     public static function tambahEvent($id_user, $nama_event, $tanggal_event, $status_event) {
         $db = Database::getConnection();
         $stmt = $db->prepare(
-            "INSERT INTO event (id_panitia, nama_event, tanggal_event, status_event)
-            SELECT id_panitia, ?, ?, ? FROM panitia WHERE id_user = ?"
+            "INSERT INTO event (id_rekruter, nama_event, tanggal_event, status_event)
+            SELECT id_rekruter, ?, ?, ? FROM rekruter WHERE id_user = ?"
         );
         $stmt->execute([$nama_event, $tanggal_event, $status_event, $id_user]);
         return $stmt->rowCount() > 0;
         }
 
-    public static function milikPanitiaIni($id_event, $id_user) {
+    public static function milikRekruterIni($id_event, $id_user) {
         $db = Database::getConnection();
         $stmt = $db->prepare(
             "SELECT 1 FROM event e
-            JOIN panitia p ON p.id_panitia = e.id_panitia
+            JOIN rekruter p ON p.id_rekruter = e.id_rekruter
             WHERE e.id_event = ? AND p.id_user = ?"
         );
         $stmt->execute([$id_event, $id_user]);
@@ -106,7 +106,7 @@ class Event {
     }
 
     public static function ubahEvent($id_event, $id_user, $nama_event, $tanggal_event, $status_event) {
-        if (!self::milikPanitiaIni($id_event, $id_user)) {
+        if (!self::milikRekruterIni($id_event, $id_user)) {
             return false;
         }
         $db = Database::getConnection();
@@ -116,7 +116,7 @@ class Event {
     }
 
     public static function hapusEvent($id_event, $id_user) {
-        if (!self::milikPanitiaIni($id_event, $id_user)) {
+        if (!self::milikRekruterIni($id_event, $id_user)) {
             return false;
         }
         $db = Database::getConnection();

@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST'
 
 $aksi = $_POST['aksi'] ?? '';
 
-if ($aksi === 'buat_panitia') {
+if ($aksi === 'buat_rekruter') {
     $nama     = trim($_POST['nama_user'] ?? '');
     $email    = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -36,8 +36,8 @@ if ($aksi === 'buat_panitia') {
     }
 
     try {
-        Admin::buatAkunPanitia($nama, $email, $password);
-        kembali('sukses', 'Akun panitia berhasil dibuat.');
+        Admin::buatAkunRekruter($nama, $email, $password);
+        kembali('sukses', 'Akun rekruter berhasil dibuat.');
     } catch (\PDOException $e) {
         if ($e->getCode() == 23000) {
             kembali('error', 'Email sudah terdaftar.');
@@ -46,11 +46,11 @@ if ($aksi === 'buat_panitia') {
     }
 }
 
-if ($aksi === 'jadikan_panitia') {
+if ($aksi === 'jadikan_rekruter') {
     $id_user = (int) ($_POST['id_user'] ?? 0);
 
-    if (Admin::jadikanPanitia($id_user)) {
-        kembali('sukses', 'Akun berhasil dijadikan panitia.');
+    if (Admin::jadikanRekruter($id_user)) {
+        kembali('sukses', 'Akun berhasil dijadikan rekruter.');
     }
     kembali('error', 'Akun tidak ditemukan atau bukan mahasiswa.');
 }

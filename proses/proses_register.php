@@ -27,7 +27,7 @@ $password  = $_POST['password'] ?? '';
 
 $role = $_POST['role'] ?? 'mahasiswa';
 
-if (!in_array($role, ['mahasiswa', 'panitia'], true)) {
+if (!in_array($role, ['mahasiswa', 'rekruter'], true)) {
     kembali('register.php', 'error', 'Pilihan peran tidak valid.');
 }
 
@@ -74,7 +74,7 @@ try {
         $stmt = $db->prepare("INSERT INTO mahasiswa (id_user, nim) VALUES (?, ?)");
         $stmt->execute([$id_user, $nim]);
     } else {
-        $stmt = $db->prepare("INSERT INTO pengajuan_panitia (id_user) VALUES (?)");
+        $stmt = $db->prepare("INSERT INTO pengajuan_rekruter (id_user) VALUES (?)");
         $stmt->execute([$id_user]);
     }
 
@@ -85,7 +85,7 @@ try {
 }
 
 // (6) sukses -> ke halaman login
-$pesan = $role === 'panitia'
-    ? 'Pengajuan akun panitia terkirim. Tunggu persetujuan admin sebelum login.'
+$pesan = $role === 'rekruter'
+    ? 'Pengajuan akun rekruter terkirim. Tunggu persetujuan admin sebelum login.'
     : 'Akun berhasil dibuat, silakan login.';
 kembali('login.php', 'sukses', $pesan);

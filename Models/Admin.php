@@ -22,19 +22,19 @@ class Admin extends User { // extends berarti Admin itu sejenis dengan User / pu
         $stmt = $db->query(
             "SELECT u.id_user, u.nama_user, u.email,
                     CASE WHEN a.id_admin IS NOT NULL THEN 'admin'
-                        WHEN p.id_panitia IS NOT NULL THEN 'panitia'
+                        WHEN p.id_rekruter IS NOT NULL THEN 'rekruter'
                         WHEN m.id_mahasiswa IS NOT NULL THEN 'mahasiswa'
                         ELSE '-' END AS role
             FROM user u
             LEFT JOIN admin a ON a.id_user = u.id_user
-            LEFT JOIN panitia p ON p.id_user = u.id_user
+            LEFT JOIN rekruter p ON p.id_user = u.id_user
             LEFT JOIN mahasiswa m ON m.id_user = u.id_user
             ORDER BY u.id_user"
         );
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public static function buatAkunPanitia($nama, $email, $password) {
+    public static function buatAkunRekruter($nama, $email, $password) {
         $db = Database::getConnection();
 
         try {
@@ -43,7 +43,7 @@ class Admin extends User { // extends berarti Admin itu sejenis dengan User / pu
             $stmt = $db->prepare("INSERT INTO user (nama_user, email, password) VALUES (?, ?, ?)");
             $stmt->execute([$nama, $email, User::hashPassword($password)]);
 
-            $stmt = $db->prepare("INSERT INTO panitia (id_user) VALUES (?)");
+            $stmt = $db->prepare("INSERT INTO rekruter (id_user) VALUES (?)");
             $stmt->execute([$db->lastInsertId()]);
 
             $db->commit();
@@ -53,13 +53,13 @@ class Admin extends User { // extends berarti Admin itu sejenis dengan User / pu
         }
     }
 
-    public static function jadikanPanitia($id_user) {
+    public static function jadikanRekruter($id_user) {
         $db = Database::getConnection();
         $stmt = $db->prepare(
-            "INSERT INTO panitia (id_user)
+            "INSERT INTO rekruter (id_user)
             SELECT m.id_user FROM mahasiswa m
             WHERE m.id_user = ?
-            AND NOT EXISTS (SELECT 1 FROM panitia p WHERE p.id_user = m.id_user)"
+            AND NOT EXISTS (SELECT 1 FROM rekruter p WHERE p.id_user = m.id_user)"
         );
         $stmt->execute([$id_user]);
         return $stmt->rowCount() > 0;
@@ -69,7 +69,7 @@ class Admin extends User { // extends berarti Admin itu sejenis dengan User / pu
         $db = Database::getConnection();
         $stmt = $db->query(
             "SELECT pp.id_pengajuan, pp.tanggal_pengajuan, u.nama_user, u.email
-            FROM pengajuan_panitia pp
+            FROM pengajuan_rekruter pp
             JOIN user u ON u.id_user = pp.id_user
             WHERE pp.status_pengajuan = 'menunggu'
             ORDER BY pp.tanggal_pengajuan ASC"
@@ -83,7 +83,7 @@ class Admin extends User { // extends berarti Admin itu sejenis dengan User / pu
         try {
             $db->beginTransaction();
 
-            $stmt = $db->prepare("SELECT id_user FROM pengajuan_panitia WHERE id_pengajuan = ? AND status_pengajuan = 'menunggu' FOR UPDATE");
+            $stmt = $db->prepare("SELECT id_user FROM pengajuan_rekruter WHERE id_pengajuan = ? AND status_pengajuan = 'menunggu' FOR UPDATE");
             $stmt->execute([$id_pengajuan]);
             $id_user = $stmt->fetchColumn();
 
@@ -93,11 +93,11 @@ class Admin extends User { // extends berarti Admin itu sejenis dengan User / pu
             }
 
             if ($keputusan === 'disetujui') {
-                $stmt = $db->prepare("INSERT INTO panitia (id_user) VALUES (?)");
+                $stmt = $db->prepare("INSERT INTO rekruter (id_user) VALUES (?)");
                 $stmt->execute([$id_user]);
             }
 
-            $stmt = $db->prepare("UPDATE pengajuan_panitia SET status_pengajuan = ? WHERE id_pengajuan = ?");
+            $stmt = $db->prepare("UPDATE pengajuan_rekruter SET status_pengajuan = ? WHERE id_pengajuan = ?");
             $stmt->execute([$keputusan, $id_pengajuan]);
 
             $db->commit();

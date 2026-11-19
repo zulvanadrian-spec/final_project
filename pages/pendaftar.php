@@ -5,18 +5,18 @@ use pbo_FP\Models\Pendaftaran;
 
 session_start();
 
-if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'panitia') {
+if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'rekruter') {
     header("Location: login.php");
     exit;
 }
 
-$daftar = Pendaftaran::untukPanitia($_SESSION['id_user']);
+$daftar = Pendaftaran::untukRekruter($_SESSION['id_user']);
 
 $error  = $_SESSION['error'] ?? null;
 $sukses = $_SESSION['sukses'] ?? null;
 unset($_SESSION['error'], $_SESSION['sukses']);
 ?>
-<a href="dashboard_panitia.php">&larr; Kembali</a>
+<a href="dashboard_rekruter.php">&larr; Kembali</a>
 <h2>Daftar Pendaftar</h2>
 
 <?php if ($sukses) { ?><p style="color:green;"><?= htmlspecialchars($sukses) ?></p><?php } ?>
