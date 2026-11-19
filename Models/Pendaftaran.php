@@ -38,8 +38,8 @@ class Pendaftaran {
         return $this->status_pendaftaran;
     }
 
-    // function untuk panitia
-    public static function untukPanitia($id_user) {
+    // function untuk rekruter
+    public static function untukRekruter($id_user) {
         $db = Database::getConnection();
         $stmt = $db->prepare(
             "SELECT p.id_pendaftaran, p.tanggal_pendaftaran, p.status_pendaftaran,
@@ -49,7 +49,7 @@ class Pendaftaran {
             JOIN user u ON u.id_user = m.id_user
             JOIN divisi d ON d.id_divisi = p.id_divisi
             JOIN event e ON e.id_event = d.id_event
-            JOIN panitia pa ON pa.id_panitia = e.id_panitia
+            JOIN rekruter pa ON pa.id_rekruter = e.id_rekruter
             WHERE pa.id_user = ?
             ORDER BY p.tanggal_pendaftaran DESC"
         );
@@ -75,7 +75,7 @@ class Pendaftaran {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    // panitia nerima/nolak -> status berubah lewat method, bukan diubah dari luar
+    // rekruter nerima/nolak -> status berubah lewat method, bukan diubah dari luar
     public function ubahStatus($status_baru) {
         $this->status_pendaftaran = $status_baru;
     }

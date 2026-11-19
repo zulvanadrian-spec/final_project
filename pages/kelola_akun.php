@@ -23,16 +23,16 @@ unset($_SESSION['error'], $_SESSION['sukses']);
 <?php if ($sukses) { ?><p style="color:green;"><?= htmlspecialchars($sukses) ?></p><?php } ?>
 <?php if ($error) { ?><p style="color:red;"><?= htmlspecialchars($error) ?></p><?php } ?>
 
-<h3>Buat Akun Panitia</h3>
+<h3>Buat Akun Rekruter</h3>
 <form action="../proses/proses_akun.php" method="POST">
-    <input type="hidden" name="aksi" value="buat_panitia">
+    <input type="hidden" name="aksi" value="buat_rekruter">
     <input type="text" name="nama_user" placeholder="Nama" required><br>
     <input type="email" name="email" placeholder="Email" required><br>
     <input type="password" name="password" placeholder="Password awal (min. 6 karakter)" required><br>
     <button type="submit">Buat Akun</button>
 </form>
 
-<h3>Pengajuan Panitia</h3>
+<h3>Pengajuan Rekruter</h3>
 <?php if (empty($pengajuan)) { ?>
     <p>Tidak ada pengajuan menunggu.</p>
 <?php } else { ?>
@@ -67,10 +67,10 @@ unset($_SESSION['error'], $_SESSION['sukses']);
         <td>
         <?php if ($a['role'] === 'mahasiswa') { ?>
             <form action="../proses/proses_akun.php" method="POST" style="display:inline"
-                  onsubmit="return confirm('Jadikan akun ini panitia?')">
-                <input type="hidden" name="aksi" value="jadikan_panitia">
+                  onsubmit="return confirm('Jadikan akun ini rekruter?')">
+                <input type="hidden" name="aksi" value="jadikan_rekruter">
                 <input type="hidden" name="id_user" value="<?= (int) $a['id_user'] ?>">
-                <button type="submit">Jadikan Panitia</button>
+                <button type="submit">Jadikan Rekruter</button>
             </form>
         <?php } else { echo '-'; } ?>
         </td>

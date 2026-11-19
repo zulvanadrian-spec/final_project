@@ -31,7 +31,7 @@ unset($_SESSION['error']);
         <label>Daftar sebagai</label><br>
         <select name="role">
             <option value="mahasiswa">Mahasiswa</option>
-            <option value="panitia">Panitia (perlu persetujuan admin)</option>
+            <option value="rekruter">Rekruter (perlu persetujuan admin)</option>
         </select><br><br>
 
         <label>NIM</label><br>

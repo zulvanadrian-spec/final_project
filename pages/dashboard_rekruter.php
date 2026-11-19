@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'panitia') {
+if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'rekruter') {
     header("Location: login.php");
     exit;
 }
@@ -10,12 +10,12 @@ if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'panitia') {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Panitia</title>
+    <title>Dashboard Rekruter</title>
 </head>
 
 <body>
     <h1>Selamat datang, <?= htmlspecialchars($_SESSION['nama_user']) ?>!</h1>
-    <p>Ini adalah halaman Dashboard khusus Panitia.</p>
+    <p>Ini adalah halaman Dashboard khusus Rekruter.</p>
 
     <br><a href="pendaftar.php">Lihat Pendaftar</a>
     <br><a href="kelola_event.php">Kelola Event</a>

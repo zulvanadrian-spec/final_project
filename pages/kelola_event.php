@@ -5,18 +5,18 @@ use pbo_FP\Models\Event;
 
 session_start();
 
-if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'panitia') {
+if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'rekruter') {
     header("Location: login.php");
     exit;
 }
 
-$daftarEvent = Event::milikPanitia($_SESSION['id_user']);
+$daftarEvent = Event::milikRekruter($_SESSION['id_user']);
 
 $error  = $_SESSION['error'] ?? null;
 $sukses = $_SESSION['sukses'] ?? null;
 unset($_SESSION['error'], $_SESSION['sukses']);
 ?>
-<a href="dashboard_panitia.php">&larr; Kembali</a>
+<a href="dashboard_rekruter.php">&larr; Kembali</a>
 <h2>Kelola Event</h2>
 
 <?php if ($sukses) { ?><p style="color:green;"><?= htmlspecialchars($sukses) ?></p><?php } ?>

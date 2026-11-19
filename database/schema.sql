@@ -55,7 +55,7 @@ CREATE TABLE `divisi` (
 
 CREATE TABLE `event` (
   `id_event` int(11) NOT NULL,
-  `id_panitia` int(11) NOT NULL,
+  `id_rekruter` int(11) NOT NULL,
   `nama_event` varchar(150) NOT NULL,
   `tanggal_event` date NOT NULL,
   `status_event` varchar(30) NOT NULL DEFAULT 'direncanakan'
@@ -76,11 +76,11 @@ CREATE TABLE `mahasiswa` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `panitia`
+-- Table structure for table `rekruter`
 --
 
-CREATE TABLE `panitia` (
-  `id_panitia` int(11) NOT NULL,
+CREATE TABLE `rekruter` (
+  `id_rekruter` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -107,7 +107,7 @@ CREATE TABLE `pendaftaran` (
 CREATE TABLE `review` (
   `id_review` int(11) NOT NULL,
   `id_pendaftaran` int(11) NOT NULL,
-  `id_panitia` int(11) NOT NULL,
+  `id_rekruter` int(11) NOT NULL,
   `keputusan` varchar(30) NOT NULL,
   `catatan` text DEFAULT NULL,
   `waktu_review` datetime NOT NULL DEFAULT current_timestamp()
@@ -149,7 +149,7 @@ ALTER TABLE `divisi`
 --
 ALTER TABLE `event`
   ADD PRIMARY KEY (`id_event`),
-  ADD KEY `fk_event_panitia` (`id_panitia`);
+  ADD KEY `fk_event_rekruter` (`id_rekruter`);
 
 --
 -- Indexes for table `mahasiswa`
@@ -160,10 +160,10 @@ ALTER TABLE `mahasiswa`
   ADD UNIQUE KEY `nim` (`nim`);
 
 --
--- Indexes for table `panitia`
+-- Indexes for table `rekruter`
 --
-ALTER TABLE `panitia`
-  ADD PRIMARY KEY (`id_panitia`),
+ALTER TABLE `rekruter`
+  ADD PRIMARY KEY (`id_rekruter`),
   ADD UNIQUE KEY `id_user` (`id_user`);
 
 --
@@ -181,7 +181,7 @@ ALTER TABLE `pendaftaran`
 ALTER TABLE `review`
   ADD PRIMARY KEY (`id_review`),
   ADD KEY `idx_review_pendaftaran` (`id_pendaftaran`),
-  ADD KEY `idx_review_panitia` (`id_panitia`);
+  ADD KEY `idx_review_rekruter` (`id_rekruter`);
 
 --
 -- Indexes for table `user`
@@ -219,10 +219,10 @@ ALTER TABLE `mahasiswa`
   MODIFY `id_mahasiswa` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `panitia`
+-- AUTO_INCREMENT for table `rekruter`
 --
-ALTER TABLE `panitia`
-  MODIFY `id_panitia` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `rekruter`
+  MODIFY `id_rekruter` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pendaftaran`
@@ -262,7 +262,7 @@ ALTER TABLE `divisi`
 -- Constraints for table `event`
 --
 ALTER TABLE `event`
-  ADD CONSTRAINT `fk_event_panitia` FOREIGN KEY (`id_panitia`) REFERENCES `panitia` (`id_panitia`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_event_rekruter` FOREIGN KEY (`id_rekruter`) REFERENCES `rekruter` (`id_rekruter`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `mahasiswa`
@@ -271,10 +271,10 @@ ALTER TABLE `mahasiswa`
   ADD CONSTRAINT `fk_mahasiswa_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `panitia`
+-- Constraints for table `rekruter`
 --
-ALTER TABLE `panitia`
-  ADD CONSTRAINT `fk_panitia_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `rekruter`
+  ADD CONSTRAINT `fk_rekruter_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pendaftaran`
@@ -287,17 +287,17 @@ ALTER TABLE `pendaftaran`
 -- Constraints for table `review`
 --
 ALTER TABLE `review`
-  ADD CONSTRAINT `fk_review_panitia` FOREIGN KEY (`id_panitia`) REFERENCES `panitia` (`id_panitia`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_review_rekruter` FOREIGN KEY (`id_rekruter`) REFERENCES `rekruter` (`id_rekruter`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_review_pendaftaran` FOREIGN KEY (`id_pendaftaran`) REFERENCES `pendaftaran` (`id_pendaftaran`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengajuan_panitia`
+-- Table structure for table `pengajuan_rekruter`
 --
 
-CREATE TABLE `pengajuan_panitia` (
+CREATE TABLE `pengajuan_rekruter` (
   `id_pengajuan` INT AUTO_INCREMENT PRIMARY KEY,
   `id_user` INT NOT NULL UNIQUE,
   `status_pengajuan` VARCHAR(30) NOT NULL DEFAULT 'menunggu',

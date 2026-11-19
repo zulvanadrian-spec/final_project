@@ -6,7 +6,7 @@ use pbo_FP\Models\Divisi;
 
 session_start();
 
-if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'panitia') {
+if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'rekruter') {
     header("Location: login.php");
     exit;
 }
@@ -14,7 +14,7 @@ if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'panitia') {
 $id_event = (int) ($_GET['id'] ?? 0);
 $event = Event::cari($id_event);
 
-if (!$event || !Event::milikPanitiaIni($id_event, $_SESSION['id_user'])) {
+if (!$event || !Event::milikRekruterIni($id_event, $_SESSION['id_user'])) {
     header("Location: kelola_event.php");
     exit;
 }
