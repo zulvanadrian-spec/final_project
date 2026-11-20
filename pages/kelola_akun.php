@@ -10,7 +10,6 @@ if (!isset($_SESSION['id_user']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-$daftarAkun = Admin::semuaAkun();
 $pengajuan = Admin::pengajuanMenunggu();
 
 $error  = $_SESSION['error'] ?? null;
@@ -21,21 +20,13 @@ unset($_SESSION['error'], $_SESSION['sukses']);
 <h2>Kelola Akun</h2>
 
 <?php if ($sukses) { ?><p style="color:green;"><?= htmlspecialchars($sukses) ?></p><?php } ?>
-<?php if ($error) { ?><p style="color:red;"><?= htmlspecialchars($error) ?></p><?php } ?>
-
-<h3>Buat Akun Rekruter</h3>
-<form action="../proses/proses_akun.php" method="POST">
-    <input type="hidden" name="aksi" value="buat_rekruter">
-    <input type="text" name="nama_user" placeholder="Nama" required><br>
-    <input type="email" name="email" placeholder="Email" required><br>
-    <input type="password" name="password" placeholder="Password awal (min. 6 karakter)" required><br>
-    <button type="submit">Buat Akun</button>
-</form>
+<?php if ($error) { ?><p style="color:red;"><?= htmlspecialchars($error) ?></p><?php }?>
 
 <h3>Pengajuan Rekruter</h3>
 <?php if (empty($pengajuan)) { ?>
     <p>Tidak ada pengajuan menunggu.</p>
 <?php } else { ?>
+
 <table border="1" cellpadding="6">
     <tr><th>Nama</th><th>Email</th><th>Tanggal</th><th>Aksi</th></tr>
     <?php foreach ($pengajuan as $p) { ?>
@@ -47,7 +38,7 @@ unset($_SESSION['error'], $_SESSION['sukses']);
             <form action="../proses/proses_akun.php" method="POST" style="display:inline">
                 <input type="hidden" name="aksi" value="putuskan_pengajuan">
                 <input type="hidden" name="id_pengajuan" value="<?= (int) $p['id_pengajuan'] ?>">
-                <button type="submit" name="keputusan" value="disetujui">Setujui</button>
+                <button type="submit" name="keputusan" value="disetujui">Izinkan</button>
                 <button type="submit" name="keputusan" value="ditolak">Tolak</button>
             </form>
         </td>
@@ -55,25 +46,3 @@ unset($_SESSION['error'], $_SESSION['sukses']);
     <?php } ?>
 </table>
 <?php } ?>
-
-<h3>Daftar Akun</h3>
-<table border="1" cellpadding="6">
-    <tr><th>Nama</th><th>Email</th><th>Role</th><th>Aksi</th></tr>
-    <?php foreach ($daftarAkun as $a) { ?>
-    <tr>
-        <td><?= htmlspecialchars($a['nama_user']) ?></td>
-        <td><?= htmlspecialchars($a['email']) ?></td>
-        <td><?= htmlspecialchars($a['role']) ?></td>
-        <td>
-        <?php if ($a['role'] === 'mahasiswa') { ?>
-            <form action="../proses/proses_akun.php" method="POST" style="display:inline"
-                  onsubmit="return confirm('Jadikan akun ini rekruter?')">
-                <input type="hidden" name="aksi" value="jadikan_rekruter">
-                <input type="hidden" name="id_user" value="<?= (int) $a['id_user'] ?>">
-                <button type="submit">Jadikan Rekruter</button>
-            </form>
-        <?php } else { echo '-'; } ?>
-        </td>
-    </tr>
-    <?php } ?>
-</table>
