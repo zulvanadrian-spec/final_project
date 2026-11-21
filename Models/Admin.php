@@ -3,21 +3,25 @@
 namespace pbo_FP\Models;
 use pbo_FP\Core\Database;
 
-class Admin extends User { // extends berarti Admin itu sejenis dengan User / punya semua yg dimiliki User
+class Admin extends User
+{ // extends berarti Admin itu sejenis dengan User / punya semua yg dimiliki User
     private $id_admin;
 
-    public function __construct($id_user, $nama_user, $email, $password, $id_admin){
+    public function __construct($id_user, $nama_user, $email, $password, $id_admin)
+    {
 
         //menitipkan nilai ke induk class yaitu User
         parent::__construct($id_user, $nama_user, $email, $password);
         $this->id_admin = $id_admin;
     }
 
-    public function getIdAdmin(){
+    public function getIdAdmin()
+    {
         return $this->id_admin;
     }
 
-    public static function semuaAkun() {
+    public static function semuaAkun()
+    {
         $db = Database::getConnection();
         $stmt = $db->query(
             "SELECT u.id_user, u.nama_user, u.email,
@@ -34,7 +38,8 @@ class Admin extends User { // extends berarti Admin itu sejenis dengan User / pu
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public static function buatAkunRekruter($nama, $email, $password) {
+    public static function buatAkunRekruter($nama, $email, $password)
+    {
         $db = Database::getConnection();
 
         try {
@@ -53,7 +58,8 @@ class Admin extends User { // extends berarti Admin itu sejenis dengan User / pu
         }
     }
 
-    public static function jadikanRekruter($id_user) {
+    public static function jadikanRekruter($id_user)
+    {
         $db = Database::getConnection();
         $stmt = $db->prepare(
             "INSERT INTO rekruter (id_user)
@@ -65,7 +71,8 @@ class Admin extends User { // extends berarti Admin itu sejenis dengan User / pu
         return $stmt->rowCount() > 0;
     }
 
-    public static function pengajuanMenunggu() {
+    public static function pengajuanMenunggu()
+    {
         $db = Database::getConnection();
         $stmt = $db->query(
             "SELECT pp.id_pengajuan, pp.tanggal_pengajuan, u.nama_user, u.email
@@ -77,31 +84,34 @@ class Admin extends User { // extends berarti Admin itu sejenis dengan User / pu
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public static function putuskanPengajuan($id_pengajuan, $keputusan) {
+    public static function putuskanPengajuan($id_pengajuan, $keputusan)
+    {
         $db = Database::getConnection();
 
         try {
             $db->beginTransaction();
+            $stmt = $db->prepare(
+                "SELECT pp.id_user, u.email, u.nama_user
+                FROM pengajuan_rekruter pp
+                JOIN user u ON u.id_user = pp.id_user
+                WHERE pp.id_pengajuan = ? AND pp.status_pengajuan = 'menunggu' FOR UPDATE"
+            );
 
-            $stmt = $db->prepare("SELECT id_user FROM pengajuan_rekruter WHERE id_pengajuan = ? AND status_pengajuan = 'menunggu' FOR UPDATE");
             $stmt->execute([$id_pengajuan]);
-            $id_user = $stmt->fetchColumn();
+            $calon = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            if (!$id_user) {
+            if (!$calon) {
                 $db->rollBack();
                 return false;
             }
 
-            if ($keputusan === 'disetujui') {
-                $stmt = $db->prepare("INSERT INTO rekruter (id_user) VALUES (?)");
-                $stmt->execute([$id_user]);
-            }
+            $id_user = $calon['id_user'];
 
             $stmt = $db->prepare("UPDATE pengajuan_rekruter SET status_pengajuan = ? WHERE id_pengajuan = ?");
             $stmt->execute([$keputusan, $id_pengajuan]);
 
             $db->commit();
-            return true;
+            return $calon;
         } catch (\PDOException $e) {
             $db->rollBack();
             throw $e;
