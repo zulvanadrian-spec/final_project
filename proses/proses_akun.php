@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../autoload.php';
 
 use pbo_FP\Models\Admin;
+use pbo_FP\Core\Mailer;
 
 session_start();
 
@@ -63,10 +64,18 @@ if ($aksi === 'putuskan_pengajuan') {
         kembali('error', 'Keputusan tidak valid.');
     }
 
-    if (Admin::putuskanPengajuan($id_pengajuan, $keputusan)) {
-        kembali('sukses', 'Pengajuan berhasil ' . $keputusan . '.');
-    }
-    kembali('error', 'Pengajuan tidak ditemukan atau sudah diputuskan.');
-}
+    $calon = Admin::putuskanPengajuan($id_pengajuan, $keputusan);
 
+if ($calon) {
+    $pesan = 'Pengajuan berhasil ' . $keputusan . '.';
+
+    try {
+        Mailer::kabarkanPengajuan($calon['email'], $calon['nama_user'], $keputusan);
+    } catch (\Throwable $e) {
+        $pesan .= ' Email notifikasi gagal terkirim.';
+    }
+
+    kembali('sukses', $pesan);
+    }
+}
 kembali('error', 'Aksi tidak dikenal.');
