@@ -1,0 +1,132 @@
+.halaman-laporan .isi-dashboard { padding-top: 2rem; }
+
+.halaman-laporan .kepala-laporan {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.halaman-laporan .kepala-laporan h1 {
+  font-size: 1.5rem;
+  color: var(--teks-gelap);
+}
+.halaman-laporan .kepala-laporan p {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.halaman-laporan .aksi-laporan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.halaman-laporan .btn-unduh,
+.halaman-laporan .btn-cetak {
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.halaman-laporan .btn-unduh {
+  background: var(--dusty-olive);
+  color: #fff;
+  border: 1px solid var(--dusty-olive);
+}
+.halaman-laporan .btn-unduh:hover { background: var(--palm-leaf); }
+
+.halaman-laporan .btn-cetak {
+  background: #fff;
+  color: var(--teks-gelap);
+  border: 1px solid var(--dusty-olive);
+}
+.halaman-laporan .btn-cetak:hover { background: var(--tea-green); }
+
+@media print {
+  .navbar,
+  .aksi-laporan,
+  .filter-laporan { display: none; }
+  .halaman-laporan .panel-dash { box-shadow: none; }
+}
+
+/* pilih event */
+.halaman-laporan .filter-laporan {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.halaman-laporan .filter-laporan label {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+.halaman-laporan .filter-laporan select {
+  height: 46px;
+  min-width: 260px;
+  padding: 0 1rem;
+  border: 1px solid var(--tea-green);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--teks-gelap);
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+.halaman-laporan .filter-laporan select:focus {
+  outline: none;
+  border-color: var(--dusty-olive);
+  box-shadow: 0 0 0 3px var(--tea-green);
+}
+
+.halaman-laporan .info-event {
+  margin-bottom: 1.25rem;
+  font-size: 0.88rem;
+  color: #6b7280;
+}
+
+/* tabel */
+.halaman-laporan .tabel-mini { min-width: 620px; }
+.halaman-laporan .tabel-mini .angka { text-align: center; }
+
+.halaman-laporan .tabel-mini tfoot td {
+  font-weight: bold;
+  border-top: 1px solid var(--tea-green);
+  border-bottom: none;
+  background: var(--frosted-mint);
+}
+
+.halaman-laporan .teks-bar {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+}
+.halaman-laporan .bar {
+  width: 140px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--tea-green);
+  overflow: hidden;
+}
+.halaman-laporan .bar span {
+  display: block;
+  height: 100%;
+  background: var(--dusty-olive);
+}
+
+.halaman-laporan .catatan-lap {
+  max-width: 260px;
+  line-height: 1.45;
+}
+
+
+
+@media (max-width: 700px) {
+  .halaman-laporan .kepala-laporan { flex-direction: column; align-items: flex-start; }
+  .halaman-laporan .filter-laporan { flex-direction: column; align-items: flex-start; }
+  .halaman-laporan .filter-laporan select { width: 100%; min-width: 0; }
+}

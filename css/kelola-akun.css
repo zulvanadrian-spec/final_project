@@ -1,0 +1,159 @@
+.halaman-akun .isi-dashboard { padding-top: 2rem; }
+
+.halaman-akun .jumlah {
+  margin-bottom: 0.75rem;
+  font-size: 0.88rem;
+  color: #6b7280;
+}
+
+.halaman-akun .info-sukses {
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  background: #f0fbf4;
+  color: #2f855a;
+  font-size: 0.92rem;
+}
+
+.halaman-akun .penanda {
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--tea-green);
+  color: var(--dusty-olive);
+  font-size: 0.72rem;
+  font-weight: bold;
+}
+
+/* peran */
+.halaman-akun .peran-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.halaman-akun .peran-mahasiswa {
+  background: var(--frosted-mint);
+  color: var(--teks-gelap);
+  border: 1px solid var(--tea-green);
+}
+.halaman-akun .peran-panitia { background: var(--tea-green); color: var(--teks-gelap); }
+.halaman-akun .peran-admin { background: var(--dusty-olive); color: #fff; }
+
+/* status */
+.halaman-akun .status.aktif { color: #2f855a; }
+.halaman-akun .status.nonaktif { color: #6b7280; }
+
+/* tombol aksi */
+.halaman-akun .aksi-lain {
+  background: none;
+  color: var(--dusty-olive);
+}
+.halaman-akun .aksi-lain:hover { background: var(--tea-green); }
+
+.halaman-akun .aksi-periksa {
+  background: var(--dusty-olive);
+  color: #fff;
+}
+.halaman-akun .aksi-periksa:hover { background: var(--palm-leaf); }
+
+.halaman-akun .aksi:disabled {
+  background: none;
+  color: #b0b5a8;
+  cursor: not-allowed;
+}
+
+.halaman-akun .teks-saya {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* dialog */
+.dialog-akun {
+  border: none;
+  border-radius: 14px;
+  padding: 1.75rem;
+  max-width: 460px;
+  width: calc(100% - 2rem);
+  color: var(--teks-gelap);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+.dialog-akun::backdrop { background: rgba(0, 0, 0, 0.4); }
+.dialog-akun h2 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+.dialog-akun .dialog-nama {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.dialog-akun .pilih-peran {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.dialog-akun .pilih-peran label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--tea-green);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.dialog-akun .pilih-peran input {
+  margin-top: 0.25rem;
+  accent-color: var(--dusty-olive);
+}
+.dialog-akun .pilih-peran label:has(input:checked) {
+  border-color: var(--dusty-olive);
+  background: var(--frosted-mint);
+}
+.dialog-akun .pilih-peran strong { display: block; }
+.dialog-akun .pilih-peran small {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.82rem;
+  color: #6b7280;
+}
+
+.dialog-akun .pesan-error {
+  margin-top: 0.75rem;
+  font-size: 0.88rem;
+  color: #c53030;
+}
+
+.dialog-akun .dl-akun { margin: 1rem 0 0; }
+.dialog-akun .dl-akun div {
+  display: flex;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eef2e6;
+  font-size: 0.92rem;
+}
+.dialog-akun .dl-akun dt { width: 100px; flex-shrink: 0; color: #6b7280; }
+.dialog-akun .dl-akun dd { margin: 0; }
+
+.dialog-akun .dialog-aksi {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.dialog-akun .dialog-aksi button {
+  padding: 0.65rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.dialog-akun .btn-batal { background: var(--tea-green); color: var(--teks-gelap); }
+.dialog-akun .btn-ya { background: var(--dusty-olive); color: #fff; }
+.dialog-akun .btn-ya:hover { background: var(--palm-leaf); }
+
+@media (max-width: 700px) {
+  .halaman-akun .filter-kelola { flex-wrap: wrap; }
+  .halaman-akun .filter-kelola select { flex: 1; min-width: 140px; }
+}   

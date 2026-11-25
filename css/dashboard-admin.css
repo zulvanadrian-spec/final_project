@@ -1,0 +1,77 @@
+.halaman-dash-admin .isi-dashboard { padding-top: 2rem; }
+
+.halaman-dash-admin .sapaan { margin-bottom: 1.25rem; }
+.halaman-dash-admin .sapaan h1 {
+  font-size: 1.6rem;
+  color: var(--teks-gelap);
+}
+.halaman-dash-admin .sapaan p {
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+/* bagian yang butuh tindakan admin */
+.halaman-dash-admin .perlu-tindakan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  background: #fff;
+  border-left: 4px solid #b7791f;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.halaman-dash-admin .perlu-tindakan strong {
+  display: block;
+  color: var(--teks-gelap);
+}
+.halaman-dash-admin .perlu-tindakan small {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+.halaman-dash-admin .perlu-tindakan .btn-mini { white-space: nowrap; }
+
+/* angka ringkasan di dalam bagian */
+.halaman-dash-admin .bagian-dash .ringkasan { margin-top: 0; }
+
+.halaman-dash-admin .warna-nonaktif { color: #6b7280; }
+
+.halaman-dash-admin .hanya-baca {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* badge peran */
+.halaman-dash-admin .peran-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.halaman-dash-admin .peran-mahasiswa {
+  background: var(--frosted-mint);
+  color: var(--teks-gelap);
+  border: 1px solid var(--tea-green);
+}
+.halaman-dash-admin .peran-panitia {
+  background: var(--tea-green);
+  color: var(--teks-gelap);
+}
+.halaman-dash-admin .peran-admin {
+  background: var(--dusty-olive);
+  color: #fff;
+}
+
+.halaman-dash-admin .tabel-event { min-width: 640px; }
+
+@media (max-width: 700px) {
+  .halaman-dash-admin .perlu-tindakan {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

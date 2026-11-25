@@ -1,0 +1,112 @@
+.halaman-kelola .kepala-halaman {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.halaman-kelola .kepala-halaman h1 {
+  font-size: 1.5rem;
+  color: var(--teks-gelap);
+}
+.halaman-kelola .kepala-halaman p {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.halaman-kelola .btn-tambah {
+  padding: 0.7rem 1.2rem;
+  background: var(--dusty-olive);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: bold;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.halaman-kelola .btn-tambah:hover { background: var(--palm-leaf); }
+
+/* filter */
+.halaman-kelola .filter-kelola {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.halaman-kelola .filter-kelola input,
+.halaman-kelola .filter-kelola select {
+  height: 46px;
+  padding: 0 1rem;
+  border: 1px solid var(--tea-green);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--teks-gelap);
+  font-family: inherit;
+  font-size: 0.92rem;
+}
+.halaman-kelola .filter-kelola input { flex: 1; }
+.halaman-kelola .filter-kelola input:focus,
+.halaman-kelola .filter-kelola select:focus {
+  outline: none;
+  border-color: var(--dusty-olive);
+  box-shadow: 0 0 0 3px var(--tea-green);
+}
+
+.halaman-kelola tr[hidden] { display: none; }
+
+/* status event */
+.halaman-kelola .status.buka  { color: #2f855a; }
+.halaman-kelola .status.tutup { color: #6b7280; }
+
+/* tombol hapus */
+.halaman-kelola .aksi-hapus {
+  background: none;
+  color: #c53030;
+}
+.halaman-kelola .aksi-hapus:hover { background: #fdf1f0; }
+
+.halaman-kelola .sel-aksi .aksi { margin-right: 0.25rem; }
+
+.halaman-kelola .kosong {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* dialog konfirmasi */
+#dialog-hapus {
+  border: none;
+  border-radius: 14px;
+  padding: 1.75rem;
+  max-width: 420px;
+  width: calc(100% - 2rem);
+  color: var(--teks-gelap);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+#dialog-hapus::backdrop { background: rgba(0, 0, 0, 0.4); }
+#dialog-hapus h2 { font-size: 1.15rem; margin-bottom: 0.6rem; }
+#dialog-hapus p { line-height: 1.6; font-size: 0.93rem; }
+
+#dialog-hapus .dialog-aksi {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+#dialog-hapus button {
+  padding: 0.65rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+#dialog-hapus .btn-batal { background: var(--tea-green); color: var(--teks-gelap); }
+#dialog-hapus .btn-hapus { background: #c53030; color: #fff; }
+#dialog-hapus .btn-hapus:hover { background: #9b2424; }
+
+@media (max-width: 700px) {
+  .halaman-kelola .kepala-halaman { flex-direction: column; align-items: flex-start; }
+  .halaman-kelola .filter-kelola { flex-direction: column; }
+}

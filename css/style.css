@@ -1,0 +1,19 @@
+:root {
+  --frosted-mint: #e9f5dbff;
+  --tea-green: #cfe1b9ff;
+  --muted-olive: #b5c99aff;
+  --muted-olive-2: #97a97cff;
+  --palm-leaf: #87986aff;
+  --dusty-olive: #718355ff;
+  --teks-gelap: #2f3a22; 
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+ 
+  background: var(--frosted-mint);
+  color: var(--teks-gelap);
+}
+
+
