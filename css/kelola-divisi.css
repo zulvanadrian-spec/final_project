@@ -1,0 +1,127 @@
+.halaman-divisi .isi-dashboard { padding-top: 1.5rem; }
+
+.halaman-divisi .kembali {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--dusty-olive);
+  text-decoration: none;
+}
+.halaman-divisi .kembali:hover { text-decoration: underline; }
+
+/* tabel */
+.halaman-divisi .aksi-hapus:disabled {
+  color: #b0b5a8;
+  cursor: not-allowed;
+}
+.halaman-divisi .aksi-hapus:disabled:hover { background: none; }
+
+.halaman-divisi .tabel-wrap .kosong {
+  padding: 1.5rem;
+  margin: 0;
+}
+
+/* pemberitahuan */
+.halaman-divisi .info-sukses,
+.halaman-divisi .info-galat {
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  font-size: 0.92rem;
+}
+.halaman-divisi .info-sukses { background: #f0fbf4; color: #2f855a; }
+.halaman-divisi .info-galat  { background: #fdf1f0; color: #c53030; }
+
+/* formulir tambah dan ubah */
+.halaman-divisi .panel-form {
+  margin-top: 1.75rem;
+  max-width: 720px;
+  background: #fff;
+  padding: 1.75rem 2rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.halaman-divisi .panel-form h2 {
+  font-size: 1.1rem;
+  color: var(--teks-gelap);
+  margin-bottom: 1.25rem;
+}
+
+.halaman-divisi .dua-kolom {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0 1.25rem;
+}
+.halaman-divisi .kolom { margin-bottom: 1.1rem; }
+
+.halaman-divisi .kolom label {
+  display: block;
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin-bottom: 0.4rem;
+}
+
+.halaman-divisi .kolom input,
+.halaman-divisi .kolom textarea {
+  width: 100%;
+  padding: 0 1rem;
+  border: 1px solid var(--tea-green);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--teks-gelap);
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+.halaman-divisi .kolom input { height: 48px; }
+.halaman-divisi .kolom textarea {
+  padding: 0.8rem 1rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+.halaman-divisi .kolom input:focus,
+.halaman-divisi .kolom textarea:focus {
+  outline: none;
+  border-color: var(--dusty-olive);
+  box-shadow: 0 0 0 3px var(--tea-green);
+}
+
+.halaman-divisi .pesan-error {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #c53030;
+}
+
+.halaman-divisi .aksi-form {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+.halaman-divisi .btn-simpan {
+  height: 48px;
+  padding: 0 1.6rem;
+  background: var(--dusty-olive);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.halaman-divisi .btn-simpan:hover { background: var(--palm-leaf); }
+
+.halaman-divisi .btn-batal-form {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: #6b7280;
+  cursor: pointer;
+}
+.halaman-divisi .btn-batal-form:hover { text-decoration: underline; }
+
+@media (max-width: 700px) {
+  .halaman-divisi .panel-form { padding: 1.4rem 1.2rem; }
+  .halaman-divisi .dua-kolom { grid-template-columns: 1fr; }
+}

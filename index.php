@@ -1,50 +1,75 @@
 <?php
 
-require_once __DIR__ . '/autoload.php';
+session_start();
 
-use pbo_FP\Models\Mahasiswa;
-use pbo_FP\Models\User;          
-use pbo_FP\Models\Pendaftaran;
-use pbo_FP\Models\Review;
-use pbo_FP\Models\Event;
+$tujuan = [
+    'mahasiswa' => 'pages/dashboard_mahasiswa.php',
+    'rekruter'  => 'pages/dashboard_rekruter.php',
+    'admin'     => 'pages/dashboard_admin.php',
+];
 
-// classs Mahasiswa.php
-$mhs = new Mahasiswa(
-    1,
-    "zulvan",
-    "zulvan@gmail.com",
-    User::hashPassword("rahasia123"),   // simpan dalam bentuk hash
-    1,
-    "25416255201061"
-);
+if (isset($_SESSION['role']) && isset($tujuan[$_SESSION['role']])) {
+    header("Location: " . $tujuan[$_SESSION['role']]);
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="id">
 
-// dilarang, hanya percobaan akses atribut private
-echo "nim mahasiswa berhasil diakses: ".$mhs->getNim() ."<br>";
-echo "id_mahasiswa berhasil diakses: ".$mhs->getIdMahasiswa();
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANITIAIN</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/lobby.css">
+</head>
 
-// tes password
-var_dump($mhs->verifyPassword("rahasia123"));  // bool(true)
-var_dump($mhs->verifyPassword("salah"));       // bool(false)
+<body>
+    <header class="navbar">
+        <a href="index.php" class="logo">
+            <img src="images/logo.png" alt="logo">
+            <span>Rekruterin</span>
+        </a>
 
-// tes Models pendaftaran
-$daftar = new Pendaftaran(
-    1,      // id_pendaftaran
-    1,      // id_mahasiswa
-    1,      // id_divisi
-    "2026-11-02 10:00:00" // tanggal_pendaftaran
-);
+        <div class="auth">
+            <a href="pages/login.php" class="btn-login">Login</a>
+            <a href="pages/register.php" class="btn-daftar">Daftar</a>
+        </div>
+    </header>
 
-echo $daftar->getStatusPendaftaran() . "<br>";   // menunggu
-$daftar->ubahStatus("diterima");
-echo $daftar->getStatusPendaftaran() . "<br>";   // diterima
+    <main>
+        <section class="hero">
+            <div class="hero-isi">
+                <h1>Bergabunglah Jadi Bagian Dari Perubahan!</h1>
+                <p>Rekrutmen dan pendaftaran anggota kepanitiaan disini. Wujudkan, pengalaman bangun relasi, dan
+                    kembangkan diri bersama kami.</p>
+                <a href="pages/register.php" class="btn-hero">Mulai Sekarang</a>
+            </div>
+        </section>
 
-// tes Models Review
-$rev = new Review(
-    1,            // id_review
-    1,            // id_pendaftaran
-    1,            // id_rekruter
-    "diterima",   // keputusan
-    "Aktif dan komunikatif",    // catatan
-    "2026-11-02 14:30:00"       // waktu_review
-);
-echo $rev->getKeputusan();      // diterima by history
+        <section class="tentang" id="tentang">
+            <div class="tentang-wadah">
+                <div class="tentang-judul">
+                    <span class="label">Tentang Kami</span>
+                    <h2>Wadah mahasiswa untuk berkarya dan berkembang</h2>
+                </div>
+
+                <div class="tentang-isi">
+                    <p>
+                        Rekruterin adalah platform rekrutmen kepanitiaan kampus. Kami
+                        mempertemukan mahasiswa yang ingin berkontribusi dengan acara-acara
+                        yang membutuhkan tim terbaik.
+                    </p>
+                    <hr>
+                    <p>
+                        Dari pendaftaran sampai seleksi, semuanya dibuat lebih mudah dan
+                        transparan, supaya kamu bisa fokus membangun pengalaman, relasi, dan
+                        kemampuan baru.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

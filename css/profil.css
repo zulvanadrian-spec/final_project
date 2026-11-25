@@ -1,0 +1,127 @@
+.halaman-profil .isi-dashboard {
+  padding-top: 2rem;
+}
+
+.halaman-profil .profil-form {
+  background: #fff;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.halaman-profil h2 {
+  font-size: 1rem;
+  color: var(--teks-gelap);
+  margin: 2rem 0 1rem;
+}
+.halaman-profil h2:first-child { margin-top: 0; }
+
+.halaman-profil .kolom { margin-bottom: 1.1rem; }
+
+.halaman-profil label,
+.halaman-profil .label-teks {
+  display: block;
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-bottom: 0.4rem;
+}
+
+.halaman-profil input[type="text"],
+.halaman-profil input[type="tel"],
+.halaman-profil input[type="email"],
+.halaman-profil input[type="date"] {
+  width: 100%;
+  height: 50px;
+  padding: 0 1rem;
+  border: 1px solid var(--tea-green);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--teks-gelap);
+  background: #fff;
+}
+
+.halaman-profil input:focus {
+  outline: none;
+  border-color: var(--dusty-olive);
+  box-shadow: 0 0 0 3px var(--tea-green);
+}
+
+.halaman-profil input[readonly] {
+  background: var(--frosted-mint);
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+/* pilihan jenis kelamin */
+.halaman-profil .pilihan {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.halaman-profil .opsi {
+  flex: 1;
+  margin: 0;
+  position: relative;
+  cursor: pointer;
+}
+
+.halaman-profil .opsi input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.halaman-profil .opsi span {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 50px;
+  padding: 0 1rem;
+  border: 1px solid var(--tea-green);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--teks-gelap);
+}
+
+.halaman-profil .titik {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--muted-olive-2);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.halaman-profil .opsi input:checked + span {
+  border-color: var(--dusty-olive);
+  background: var(--frosted-mint);
+}
+.halaman-profil .opsi input:checked + span .titik {
+  border-color: var(--dusty-olive);
+  background: radial-gradient(circle, var(--dusty-olive) 45%, transparent 50%);
+}
+.halaman-profil .opsi input:focus-visible + span {
+  box-shadow: 0 0 0 3px var(--tea-green);
+}
+
+.halaman-profil .btn-simpan {
+  width: 100%;
+  height: 50px;
+  margin-top: 1.5rem;
+  background: var(--dusty-olive);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+}
+.halaman-profil .btn-simpan:hover { background: var(--palm-leaf); }
+
+@media (max-width: 600px) {
+  .halaman-profil .profil-form { padding: 1.5rem 1.25rem; }
+}

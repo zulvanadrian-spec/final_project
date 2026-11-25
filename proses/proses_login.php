@@ -39,7 +39,7 @@ if (!$userData) {
     kembali('login.php', 'error', 'Email tidak terdaftar.');
 }
 
-// 5. Bikin objek User buat pakai method verifikasi password lu
+// 5. Bikin objek User buat pakai method verifikasi password
 $user = new User(
     $userData['id_user'], 
     $userData['nama_user'], 
@@ -79,6 +79,28 @@ if ($role === '') {
     }
 }
 
+// Cek jika belum punya role (misal rekruter yang masih menunggu ACC admin atau ditolak)
+if ($role === '') {
+    $stmtPengajuan = $db->prepare("SELECT status_pengajuan, catatan FROM pengajuan_rekruter WHERE id_user = ?");
+    $stmtPengajuan->execute([$userData['id_user']]);
+    $pengajuan = $stmtPengajuan->fetch(\PDO::FETCH_ASSOC);
+
+    if ($pengajuan) {
+        if ($pengajuan['status_pengajuan'] === 'menunggu') {
+            kembali('login.php', 'error', 'Akun rekruter kamu masih menunggu persetujuan admin.');
+        } else {
+            $alasan = trim($pengajuan['catatan'] ?? '');
+            $pesanTolak = 'Pengajuan akun rekruter kamu ditolak.';
+            if ($alasan !== '') {
+                $pesanTolak .= ' Alasan: ' . $alasan;
+            }
+            kembali('login.php', 'error', $pesanTolak);
+        }
+    }
+
+    kembali('login.php', 'error', 'Akun tidak memiliki role yang valid.');
+}
+
 // 7. Simpan data penting ke Session (biar sistem ingat siapa yang login)
 $_SESSION['id_user']   = $userData['id_user'];
 $_SESSION['nama_user'] = $userData['nama_user'];
@@ -92,7 +114,6 @@ if ($role === 'mahasiswa') {
 } elseif ($role === 'rekruter') {
     header("Location: ../pages/dashboard_rekruter.php");
 } else {
-    // Jaga-jaga kalau akunnya ngambang (ada di tabel user tapi gak ada di 3 role itu)
     kembali('login.php', 'error', 'Akun tidak memiliki role yang valid.');
 }
 exit;

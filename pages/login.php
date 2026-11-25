@@ -6,34 +6,74 @@ $error = $_SESSION['error'] ?? null;
 $sukses = $_SESSION['sukses'] ?? null;
 unset($_SESSION['error'], $_SESSION['sukses']);
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Rekruterin</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
 </head>
+
 <body>
-    <h2>Login</h2>
 
-    <?php if ($sukses) { ?>
-        <p style="color:green;"><?= htmlspecialchars($sukses) ?></p>
-    <?php } ?>
+    <main class="login-halaman">
+        <div class="login-kartu">
 
-    <?php if ($error) { ?>
-        <p style="color:red;"><?= htmlspecialchars($error) ?></p>
-    <?php } ?>
+            <div class="login-sisi">
+                <h2>Selamat datang!</h2>
+                <p>Masuk untuk melanjutkan pendaftaran dan memantau status kepanitiaanmu.</p>
+            </div>
 
-    <form action="../proses/proses_login.php" method="POST">
-        <label>Email</label><br>
-        <input type="email" name="email" required><br><br>
+            <form class="login-form" action="../proses/proses_login.php" method="post">
+                <h1>Login</h1>
+                <p class="sub">Masukkan akun yang sudah kamu daftarkan.</p>
 
-        <label>Password</label><br>
-        <input type="password" name="password" required><br><br>
+                <?php if ($error): ?>
+                    <div style="background: #fee2e2; color: #b91c1c; padding: 10px 14px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;">
+                        <?= htmlspecialchars($error) ?>
+                    </div>
+                <?php endif; ?>
 
-        <button type="submit">Login</button>
-    </form>
+                <?php if ($sukses): ?>
+                    <div style="background: #dcfce7; color: #15803d; padding: 10px 14px; border-radius: 8px; margin-bottom: 16px; font-size: 14px;">
+                        <?= htmlspecialchars($sukses) ?>
+                    </div>
+                <?php endif; ?>
 
-    <p>Belum punya akun? <a href="register.php">Daftar</a></p>
+                <div class="kolom">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="nama@email.com" required>
+                </div>
+
+                <div class="kolom">
+                    <label for="password">Password</label>
+                    <div class="input-password">
+                        <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+                        <button type="button" class="lihat" id="lihat" aria-label="Tampilkan password">Lihat</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Masuk</button>
+
+                <p class="pindah">Belum punya akun? <a href="register.php">Daftar di sini</a></p>
+            </form>
+
+        </div>
+    </main>
+
+    <script>
+        const input = document.getElementById("password");
+        const tombol = document.getElementById("lihat");
+
+        tombol.addEventListener("click", () => {
+            const tersembunyi = input.type === "password";
+            input.type = tersembunyi ? "text" : "password";
+            tombol.textContent = tersembunyi ? "Sembunyi" : "Lihat";
+        });
+    </script>
 </body>
+
 </html>

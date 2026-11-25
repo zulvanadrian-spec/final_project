@@ -4,13 +4,11 @@ namespace pbo_FP\Models;
 use pbo_FP\Core\Database;
 
 class Admin extends User
-{ // extends berarti Admin itu sejenis dengan User / punya semua yg dimiliki User
+{
     private $id_admin;
 
     public function __construct($id_user, $nama_user, $email, $password, $id_admin)
     {
-
-        //menitipkan nilai ke induk class yaitu User
         parent::__construct($id_user, $nama_user, $email, $password);
         $this->id_admin = $id_admin;
     }
@@ -28,54 +26,24 @@ class Admin extends User
                     CASE WHEN a.id_admin IS NOT NULL THEN 'admin'
                         WHEN p.id_rekruter IS NOT NULL THEN 'rekruter'
                         WHEN m.id_mahasiswa IS NOT NULL THEN 'mahasiswa'
-                        ELSE '-' END AS role
+                        WHEN pp.status_pengajuan = 'menunggu' THEN 'calon_rekruter'
+                        ELSE '-' END AS role,
+                    pp.status_pengajuan
             FROM user u
             LEFT JOIN admin a ON a.id_user = u.id_user
             LEFT JOIN rekruter p ON p.id_user = u.id_user
             LEFT JOIN mahasiswa m ON m.id_user = u.id_user
-            ORDER BY u.id_user"
+            LEFT JOIN pengajuan_rekruter pp ON pp.id_user = u.id_user
+            ORDER BY u.id_user DESC"
         );
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    }
-
-    public static function buatAkunRekruter($nama, $email, $password)
-    {
-        $db = Database::getConnection();
-
-        try {
-            $db->beginTransaction();
-
-            $stmt = $db->prepare("INSERT INTO user (nama_user, email, password) VALUES (?, ?, ?)");
-            $stmt->execute([$nama, $email, User::hashPassword($password)]);
-
-            $stmt = $db->prepare("INSERT INTO rekruter (id_user) VALUES (?)");
-            $stmt->execute([$db->lastInsertId()]);
-
-            $db->commit();
-        } catch (\PDOException $e) {
-            $db->rollBack();
-            throw $e;
-        }
-    }
-
-    public static function jadikanRekruter($id_user)
-    {
-        $db = Database::getConnection();
-        $stmt = $db->prepare(
-            "INSERT INTO rekruter (id_user)
-            SELECT m.id_user FROM mahasiswa m
-            WHERE m.id_user = ?
-            AND NOT EXISTS (SELECT 1 FROM rekruter p WHERE p.id_user = m.id_user)"
-        );
-        $stmt->execute([$id_user]);
-        return $stmt->rowCount() > 0;
     }
 
     public static function pengajuanMenunggu()
     {
         $db = Database::getConnection();
         $stmt = $db->query(
-            "SELECT pp.id_pengajuan, pp.tanggal_pengajuan, u.nama_user, u.email
+            "SELECT pp.id_pengajuan, pp.tanggal_pengajuan, pp.berkas, u.nama_user, u.email
             FROM pengajuan_rekruter pp
             JOIN user u ON u.id_user = pp.id_user
             WHERE pp.status_pengajuan = 'menunggu'
@@ -84,7 +52,7 @@ class Admin extends User
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public static function putuskanPengajuan($id_pengajuan, $keputusan)
+    public static function putuskanPengajuan($id_pengajuan, $keputusan, $catatan = null)
     {
         $db = Database::getConnection();
 
@@ -107,8 +75,18 @@ class Admin extends User
 
             $id_user = $calon['id_user'];
 
-            $stmt = $db->prepare("UPDATE pengajuan_rekruter SET status_pengajuan = ? WHERE id_pengajuan = ?");
-            $stmt->execute([$keputusan, $id_pengajuan]);
+            // Simpan status keputusan beserta catatan dari admin
+            $stmt = $db->prepare("UPDATE pengajuan_rekruter SET status_pengajuan = ?, catatan = ? WHERE id_pengajuan = ?");
+            $stmt->execute([$keputusan, $catatan, $id_pengajuan]);
+
+            // Jika disetujui, daftarkan user ke tabel rekruter agar bisa login
+            if ($keputusan === 'disetujui') {
+                $stmt = $db->prepare(
+                    "INSERT INTO rekruter (id_user)
+                     SELECT ? WHERE NOT EXISTS (SELECT 1 FROM rekruter WHERE id_user = ?)"
+                );
+                $stmt->execute([$id_user, $id_user]);
+            }
 
             $db->commit();
             return $calon;

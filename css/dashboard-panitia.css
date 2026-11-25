@@ -1,0 +1,16 @@
+.halaman-dash-rekruter .isi-dashboard { padding-top: 2rem; }
+
+.halaman-dash-rekruter .sapaan { margin-bottom: 1.5rem; }
+.halaman-dash-rekruter .sapaan h1 {
+  font-size: 1.6rem;
+  color: var(--teks-gelap);
+}
+.halaman-dash-rekruter .sapaan p {
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.halaman-dashboard .warna-tutup { color: #6b7280; }
+
+.halaman-dash-rekruter .ringkasan { margin-top: 0; }

@@ -1,0 +1,235 @@
+.login-halaman {
+  min-height: calc(100vh);  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background: var(--frosted-mint);
+}
+
+.login-kartu {
+  display: flex;
+  width: 100%;
+  max-width: 880px;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* panel kiri */
+.login-sisi {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 2.5rem;
+  background: var(--dusty-olive);
+  color: #fff;
+}
+.login-sisi h2 {
+  font-size: 1.9rem;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+.login-sisi p {
+  line-height: 1.7;
+  color: var(--frosted-mint);
+}
+
+/* form kanan */
+.login-form {
+  flex: 1;
+  padding: 3rem 2.5rem;
+}
+.login-form h1 {
+  font-size: 1.8rem;
+  color: var(--teks-gelap);
+  margin-bottom: 0.4rem;
+}
+.login-form .sub {
+  color: #6b7280;
+  margin-bottom: 1.75rem;
+}
+
+.kolom { margin-bottom: 1.1rem; }
+.kolom label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--teks-gelap);
+  margin-bottom: 0.4rem;
+}
+
+.kolom input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--muted-olive);
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+}
+.kolom input:focus {
+  outline: none;
+  border-color: var(--dusty-olive);
+  box-shadow: 0 0 0 3px var(--tea-green);
+}
+
+.input-password { position: relative; }
+.input-password input { padding-right: 5rem; }
+.lihat {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--dusty-olive);
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.baris-opsi {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+.ingat { display: flex; align-items: center; gap: 0.4rem; color: var(--teks-gelap); }
+
+.btn-submit {
+  width: 100%;
+  padding: 0.8rem;
+  background: var(--dusty-olive);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0.75rem;
+}
+.btn-submit:hover { background: var(--palm-leaf); }
+
+.pindah {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+.pindah a { color: var(--dusty-olive); font-weight: bold; text-decoration: none; }
+.pindah a:hover { text-decoration: underline; }
+
+/* ===== TAMBAHAN HALAMAN DAFTAR ===== */
+.dua-kolom {
+  display: flex;
+  gap: 1rem;
+}
+.dua-kolom .kolom { flex: 1; }
+
+.pesan-error {
+  color: #b42318;
+  font-size: 0.85rem;
+  margin-top: 0.35rem;
+}
+.pesan-error:empty { display: none; }
+
+.setuju {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+.setuju input { width: auto; }
+
+/* ===== PILIHAN PERAN ===== */
+.peran {
+  border: none;
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.peran legend {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--teks-gelap);
+  margin-bottom: 0.4rem;
+}
+
+.peran-opsi {
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+}
+
+/* radio asli disembunyikan, tapi tetap bisa difokus keyboard */
+.peran-opsi input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.peran-opsi span {
+  display: block;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--muted-olive);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.peran-opsi strong {
+  display: block;
+  color: var(--teks-gelap);
+}
+
+.peran-opsi small {
+  color: #6b7280;
+  font-size: 0.8rem;
+}
+
+.peran-opsi input:checked + span {
+  border-color: var(--dusty-olive);
+  background: var(--frosted-mint);
+  box-shadow: 0 0 0 3px var(--tea-green);
+}
+
+.peran-opsi input:focus-visible + span {
+  outline: 2px solid var(--dusty-olive);
+  outline-offset: 2px;
+}
+
+.petunjuk {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 0.35rem;
+}
+
+.kolom input[type="file"] {
+  padding: 0.65rem 0.8rem;
+  border: 1px dashed var(--muted-olive-2);
+  background: var(--frosted-mint);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.kolom input[type="file"]:focus {
+  border-color: var(--dusty-olive);
+}
+
+@media (max-width: 480px) {
+  .peran { flex-direction: column; }
+}
+
+@media (max-width: 700px) {
+  .dua-kolom { flex-direction: column; gap: 0; }
+}
+
+/* HP */
+@media (max-width: 700px) {
+  .login-kartu { flex-direction: column; }
+  .login-sisi { padding: 2rem 1.5rem; }
+  .login-sisi h2 { font-size: 1.5rem; }
+  .login-form { padding: 2rem 1.5rem; }
+}
