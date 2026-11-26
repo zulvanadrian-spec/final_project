@@ -27,8 +27,7 @@ if (isset($_SESSION['role']) && isset($tujuan[$_SESSION['role']])) {
 <body>
     <header class="navbar">
         <a href="index.php" class="logo">
-            <img src="images/logo.png" alt="logo">
-            <span>Sylvara</span>
+            <img src="images/logo_sylvara.png" alt="logo">
         </a>
 
         <div class="auth">
