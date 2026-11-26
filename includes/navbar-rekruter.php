@@ -1,7 +1,7 @@
 <header class="navbar">
     <div class="navbar__inner">
         <a href="dashboard_rekruter.php" class="navbar__brand">
-            <span>Rekruterin</span>
+            <span>Sylvara</span>
         </a>
 
         <button class="navbar__toggle" type="button" aria-label="Buka menu" aria-expanded="false"

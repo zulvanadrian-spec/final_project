@@ -37,7 +37,7 @@ $eventTerbaru       = array_slice($semuaEvent, 0, 3);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Rekruterin</title>
+    <title>Dashboard - Sylvara</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
