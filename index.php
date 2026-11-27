@@ -19,7 +19,7 @@ if (isset($_SESSION['role']) && isset($tujuan[$_SESSION['role']])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PANITIAIN</title>
+    <title>SYLVARA</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/lobby.css">
 </head>
@@ -27,8 +27,7 @@ if (isset($_SESSION['role']) && isset($tujuan[$_SESSION['role']])) {
 <body>
     <header class="navbar">
         <a href="index.php" class="logo">
-            <img src="images/logo.png" alt="logo">
-            <span>Rekruterin</span>
+            <img src="images/logo_sylvara.png" alt="logo">
         </a>
 
         <div class="auth">
