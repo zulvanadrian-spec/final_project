@@ -43,7 +43,7 @@ unset($_SESSION['error']);
                     <label class="peran-opsi">
                         <input type="radio" name="peran" value="mahasiswa" checked>
                         <span>
-                            <strong>Mahasiswa</strong>
+                            <h4>Mahasiswa</h4>
                             <small>Mendaftar ke kepanitiaan</small>
                         </span>
                     </label>

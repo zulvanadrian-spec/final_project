@@ -4,7 +4,7 @@
   --sage: #b8a8e5;
   --cream: #f6f4fb;
   --paper: #fff;
-  --gold: #f6ac36;
+  --gold: #f6c936;
   --ink: #242743;
   --muted: #73758a;
   --line: rgba(36, 39, 67, 0.12);
@@ -14,8 +14,8 @@
   --putih-tulang-netral: #F8F7F4; /* Putih tulang netral (lebih mendekati putih) */
   --biru-tua: #0F172A;        /* Biru dongker gelap (Midnight Navy) */
   --biru-indigo: #1E2952;     /* Biru tua keunguan */
-  --ungu-halus: #3B2F63;      /* Ungu gelap elegan (tidak mencolok) */
-  --gold-gelap: rgb(166, 152, 73);
+  --gold-gelap: rgb(187, 159, 0);
+  --gold-terang: rgb(255, 230, 0);
 }
 :root {
     --font-judul: 'Playfair Display', serif;
@@ -37,6 +37,10 @@
     --font-isi: 'Manrope', sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--font-isi);
 }
@@ -49,5 +53,5 @@ h1, h2, h3 {
 
 body {
     min-height: 50vh;
-    background: linear-gradient(135deg, #162447 0%, #4c4c5e 55%, #332bc0 100%);
+    background: linear-gradient(to bottom, #040035 0%, #7B93AB 45%, #FAF8F5 100%);
 }

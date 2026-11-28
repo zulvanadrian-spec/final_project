@@ -4,15 +4,14 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 1.5rem;
-  background: var(--ink);
-  min-height: 100vh;
+  background: linear-gradient(to bottom, #040035 0%, #7B93AB 45%, #FAF8F5 100%);
 }
 
 .login-kartu {
   display: flex;
   width: 100%;
   max-width: 880px;
-  background: #fff;
+  background: var(--cream);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
@@ -25,13 +24,14 @@
   flex-direction: column;
   justify-content: center;
   padding: 3rem 2.5rem;
-  background: var(--dark-graphite);
-  color: var(--jasmine);
+  color: var(--forest);
+  background: var(--putih-tulang);;
 }
 .login-sisi h2 {
   font-size: 1.9rem;
   line-height: 1.25;
   margin-bottom: 1rem;
+  background: var(--putih-tulang);
 }
 .login-sisi p {
   line-height: 1.7;
@@ -42,6 +42,8 @@
 .login-form {
   flex: 1;
   padding: 3rem 2.5rem;
+  color: var(--forest);
+  background: var(--putih-tulang);
 }
 .login-form h1 {
   font-size: 1.8rem;
@@ -49,7 +51,7 @@
   margin-bottom: 0.4rem;
 }
 .login-form .sub {
-  color: #6b7280;
+  color: var(--forest);
   margin-bottom: 1.75rem;
 }
 
@@ -104,8 +106,8 @@
 .btn-submit {
   width: 100%;
   padding: 0.8rem;
-  background: var(--dark-graphite);
-  color: var(--jasmine);
+  background: var(--gold);
+  color: var(--forest);
   border: none;
   border-radius: 6px;
   font-size: 1rem;
@@ -113,7 +115,7 @@
   cursor: pointer;
   margin-top: 0.75rem;
 }
-.btn-submit:hover { background: #427F2F; }
+.btn-submit:hover { background: rgb(255, 213, 0); }
 
 .pindah {
   text-align: center;
@@ -176,14 +178,19 @@
 .peran-opsi span {
   display: block;
   padding: 0.7rem 0.9rem;
-  border: 1px solid var(--muted-olive);
+  border: 1px solid var(--cream);
   border-radius: 6px;
-  background: #fff;
+  background: var(--forest);
 }
 
 .peran-opsi strong {
   display: block;
-  color: var(--teks-gelap);
+  color: var(--cream);
+}
+
+.peran-opsi h4 {
+  display: block;
+  color: var(--forest);
 }
 
 .peran-opsi small {
@@ -234,3 +241,17 @@
   .login-sisi h2 { font-size: 1.5rem; }
   .login-form { padding: 2rem 1.5rem; }
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-isi);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-judul);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
