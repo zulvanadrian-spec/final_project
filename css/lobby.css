@@ -1,4 +1,5 @@
 .navbar {
+  background-color: #121a41;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,16 +8,22 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  overflow: visible; /* pastikan shadow tidak terpotong */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); /* angka 0.25 dinaikkan biar langsung kelihatan jelas */
 }
 .logo {
-  display: flex;
+  display: inline-block;
+  cursor: pointer;
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
   font-weight: bold;
   font-size: 1.1rem;
-  color: var(--teks-gelap);
+  will-change: transform;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), 
+  opacity 0.45s ease;
 }
+
 .logo img {
   margin-top: 10px;
   margin-left: 15px;
@@ -25,9 +32,16 @@
 }
 
 .auth {
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.06) translateY(-1px);
+    opacity: 0.92;
 }
 
 .btn-login,
@@ -41,18 +55,37 @@
 
 .btn-login {
   border-radius: 50px;
-  color: white;
+  color: var(--forest);
   border: 1px solid var(--gold);
+  display: inline-block;
+  cursor: pointer;
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.btn-login:hover { background: var(--gold-gelap); }
+.btn-login:hover {
+  background: var(--gold-terang);
+  transform: translateY(-2px);
+  filter: drop-shadow(0 4px 10px rgba(15, 12, 34, 0.599));
+  transform: scale(1.07);
+
+}
 
 .btn-daftar {
+  display: inline-block;
+  cursor: pointer;
   border-radius: 50px;
-  background-color: var(--line);
-  color: #fff;
+  background-color: var(--gold);
+  color: var(--forest);
   border: 1px solid var(--gold);
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.btn-daftar:hover { background: var(--forest-light); }
+
+.btn-daftar:hover {
+  background: var(--gold-terang);
+  transform: scale(1.07);;
+  filter: drop-shadow(0 4px 10px rgba(15, 12, 34, 0.599));
+}
 
 .hero {
   width: 100%;
@@ -90,12 +123,20 @@
   display: inline-block;
   padding: 1rem 2rem;
   background: var(--gold);
-  color: rgb(255, 255, 255);
+  color: var(--forest);
   text-decoration: none;
-  border-radius: 150px;           /* kecil = kotak, seperti di contoh */
+  border-radius: 150px;
   font-weight: bold;
+  cursor: pointer;
+  will-change: transform;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), 
+  opacity 0.45s ease;
 }
-.btn-hero:hover { background: var(--gold-gelap); }
+.btn-hero:hover {
+  background: var(--gold-terang);
+  transform: scale(1.06) translateY(-1px);
+  opacity: 0.92;
+}
 
 
 .tentang {

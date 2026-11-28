@@ -45,13 +45,13 @@ if (isset($_SESSION['role']) && isset($tujuan[$_SESSION['role']])) {
         <section class="hero">
             <div class="hero-isi">
                 <h1 id="headline">
-                    Bikin event.<br />Bangun cerita.<br />Mulai dari sini.
+                    Buat event.<br />Bangun cerita.<br />Mulai dari sini.
                 </h1>
                 <p>
                     Punya ide, energi, atau sekadar ingin mencoba hal baru? Temukan tim
                     kepanitiaan yang cocok dan ciptakan momen kampus bareng Sylvara.
                 </p>
-                <a href="pages/register.php" class="btn-hero">Mulai Sekarang -></a>
+                <a href="pages/register.php" class="btn-hero">Mulai Sekarang &rarr;</a>
             </div>
         </section>
 
@@ -64,7 +64,7 @@ if (isset($_SESSION['role']) && isset($tujuan[$_SESSION['role']])) {
 
                 <div class="tentang-isi">
                     <p>
-                        Rekruterin adalah platform rekrutmen kepanitiaan kampus. Kami
+                        Sylvara adalah platform rekrutmen kepanitiaan kampus. Kami
                         mempertemukan mahasiswa yang ingin berkontribusi dengan acara-acara
                         yang membutuhkan tim terbaik.
                     </p>
@@ -82,10 +82,10 @@ if (isset($_SESSION['role']) && isset($tujuan[$_SESSION['role']])) {
 
         <section class="section-divisi">
             <div class="divisi-header">
-                <span class="divisi-eyebrow">BUKAN CUMA JADI PENONTON</span>
+                <span class="divisi-eyebrow">BUKAN HANYA MENJADI PENONTON</span>
                 <h2 class="divisi-title">Event terbaik kampus dimulai dari orang-orang di baliknya.</h2>
                 <p class="divisi-subtitle">
-                    Gabung ke kepanitiaan, coba peran baru, dan bikin sesuatu yang bakal dikenang bareng teman-teman
+                    Gabung ke kepanitiaan, coba peran baru, dan membuat sesuatu yang akan dikenang bareng teman-teman
                     kampusmu.
                 </p>
             </div>
