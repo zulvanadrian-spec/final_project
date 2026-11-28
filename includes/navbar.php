@@ -1,7 +1,7 @@
 <header class="navbar">
     <div class="navbar__inner">
         <a href="dashboard_mahasiswa.php" class="navbar__brand">
-            <span>Sylvara</span>
+            <span>sylvara</span>
         </a>
 
         <button class="navbar__toggle" type="button" aria-label="Buka menu" aria-expanded="false"

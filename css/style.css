@@ -1,19 +1,53 @@
 :root {
-  --frosted-mint: #e9f5dbff;
-  --tea-green: #cfe1b9ff;
-  --muted-olive: #b5c99aff;
-  --muted-olive-2: #97a97cff;
-  --palm-leaf: #87986aff;
-  --dusty-olive: #718355ff;
-  --teks-gelap: #2f3a22; 
+  --forest: #242d58;
+  --forest-light: #414b83;
+  --sage: #b8a8e5;
+  --cream: #f6f4fb;
+  --paper: #fff;
+  --gold: #f6ac36;
+  --ink: #242743;
+  --muted: #73758a;
+  --line: rgba(36, 39, 67, 0.12);
+  --shadow: 0 24px 70px rgba(36, 45, 88, 0.14);
+  --putih-tulang: #fff9ef;        /* Putih tulang hangat & bersih (paling pas dipadukan dengan #5E7892) */
+  --putih-tulang-soft: #F5F2EB;   /* Putih tulang agak krem / ivory */
+  --putih-tulang-netral: #F8F7F4; /* Putih tulang netral (lebih mendekati putih) */
+  --biru-tua: #0F172A;        /* Biru dongker gelap (Midnight Navy) */
+  --biru-indigo: #1E2952;     /* Biru tua keunguan */
+  --ungu-halus: #3B2F63;      /* Ungu gelap elegan (tidak mencolok) */
+  --gold-gelap: rgb(166, 152, 73);
+}
+:root {
+    --font-judul: 'Playfair Display', serif;
+    --font-isi: 'DM Sans', sans-serif;
+}
+
+:root {
+    --font-judul: 'Syne', sans-serif;
+    --font-isi: 'Space Grotesk', sans-serif;
+}
+
+:root {
+    --font-judul: 'Cinzel', serif;
+    --font-isi: 'Plus Jakarta Sans', sans-serif;
+}
+
+:root {
+    --font-judul: 'Bricolage Grotesque', sans-serif;
+    --font-isi: 'Manrope', sans-serif;
+}
+
+body {
+    font-family: var(--font-isi);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-judul);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
- 
-  background: var(--frosted-mint);
-  color: var(--teks-gelap);
+    min-height: 50vh;
+    background: linear-gradient(135deg, #162447 0%, #4c4c5e 55%, #332bc0 100%);
 }
-
-
