@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#242d58" />
+    <meta
+      name="description"
+      content="Sylvara — temukan kepanitiaan event kampus yang cocok untukmu dan mulai pengalaman organisasi pertamamu."
+    />
+    <title>Sylvara — Temukan tim dan event kampusmu</title>
+    <style>
+      :root {
+        --forest: #242d58;
+        --forest-light: #414b83;
+        --sage: #b8a8e5;
+        --cream: #f6f4fb;
+        --paper: #fff;
+        --gold: #ffc66d;
+        --ink: #242743;
+        --muted: #73758a;
+        --line: rgba(36, 39, 67, 0.12);
+        --shadow: 0 24px 70px rgba(36, 45, 88, 0.14);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--cream);
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible {
+        outline: 3px solid var(--gold);
+        outline-offset: 4px;
+      }
+      .hero-wrap {
+        min-height: 100svh;
+        overflow: hidden;
+        color: var(--paper);
+        background:
+          radial-gradient(
+            ellipse at 78% 18%,
+            rgba(255, 198, 109, 0.25),
+            transparent 30%
+          ),
+          radial-gradient(
+            ellipse at 18% 88%,
+            rgba(115, 99, 177, 0.46),
+            transparent 35%
+          ),
+          linear-gradient(128deg, #20264a 0%, #343d70 52%, #645b91 100%);
+        position: relative;
+      }
+      .hero-wrap::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.13;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+        mix-blend-mode: soft-light;
+      }
+      .site-header {
+        width: min(1160px, calc(100% - 48px));
+        height: 88px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        z-index: 2;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 25px;
+        letter-spacing: 0.02em;
+      }
+      .brand-mark {
+        width: 31px;
+        height: 31px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(255, 198, 109, 0.85);
+        border-radius: 50% 50% 50% 8px;
+        color: var(--gold);
+        font-size: 17px;
+        transform: rotate(-12deg);
+      }
+      .brand-mark span {
+        transform: rotate(12deg);
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 34px;
+        font-size: 13px;
+        color: rgba(255, 253, 247, 0.78);
+      }
+      .nav-links a:not(.nav-cta):hover {
+        color: white;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        font-size: 13px;
+      }
+      .login-link {
+        color: rgba(255, 253, 247, 0.88);
+      }
+      .nav-cta,
+      .button-primary {
+        border-radius: 999px;
+        background: var(--gold);
+        color: #20382b;
+        font-weight: 650;
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease;
+      }
+      .nav-cta {
+        padding: 12px 18px;
+      }
+      .nav-cta:hover,
+      .button-primary:hover {
+        transform: translateY(-2px);
+        background: #e4ca8c;
+      }
+      .menu-toggle {
+        display: none;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: white;
+        background: transparent;
+        border-radius: 50%;
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .hero {
+        width: min(1160px, calc(100% - 48px));
+        margin: auto;
+        min-height: calc(100svh - 89px);
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        align-items: center;
+        gap: 40px;
+        padding: 70px 0 80px;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-copy {
+        max-width: 590px;
+        padding-bottom: 15px;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 24px;
+        text-transform: uppercase;
+        letter-spacing: 0.19em;
+        font-size: 10px;
+        font-weight: 700;
+        color: #ffd27f;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: currentColor;
+      }
+      h1 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(54px, 7.2vw, 90px);
+        font-weight: 400;
+        line-height: 0.99;
+        letter-spacing: -0.055em;
+      }
+      h1 em {
+        color: #ffd27f;
+        font-weight: 400;
+      }
+      .hero-copy > p {
+        max-width: 440px;
+        margin: 26px 0 32px;
+        color: rgba(255, 253, 247, 0.75);
+        font-size: 15px;
+        line-height: 1.8;
+      }
+      .hero-buttons {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .button-primary {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 23px;
+        font-size: 13px;
+      }
+      .text-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        color: rgba(255, 253, 247, 0.9);
+        font-size: 13px;
+      }
+      .text-link span {
+        font-size: 18px;
+        transition: transform 0.2s ease;
+      }
+      .text-link:hover span {
+        transform: translateX(4px);
+      }
+      .hero-note {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 56px;
+        color: rgba(255, 253, 247, 0.62);
+        font-size: 11px;
+      }
+      .note-dots {
+        display: flex;
+      }
+      .note-dots i {
+        width: 25px;
+        height: 25px;
+        display: block;
+        margin-left: -6px;
+        border: 2px solid #343d70;
+        border-radius: 50%;
+        background: linear-gradient(140deg, #e5caa0, #9aa887);
+      }
+      .note-dots i:first-child {
+        margin-left: 0;
+        background: linear-gradient(140deg, #d9ad8a, #765f4b);
+      }
+      .note-dots i:nth-child(2) {
+        background: linear-gradient(140deg, #efdbb5, #a66f56);
+      }
+      .note-dots i:nth-child(3) {
+        background: linear-gradient(140deg, #c6d0a4, #63775b);
+      }
+      .visual {
+        min-height: 500px;
+        display: grid;
+        place-items: center;
+        position: relative;
+      }
+      .portrait-card {
+        width: min(390px, 83%);
+        height: 465px;
+        overflow: hidden;
+        position: relative;
+        border-radius: 48% 48% 24px 24px;
+        border: 1px solid rgba(255, 255, 255, 0.34);
+        box-shadow: 0 30px 80px rgba(5, 23, 15, 0.38);
+        background: #52694c;
+      }
+      .portrait-card::after {
+        content: "";
+        position: absolute;
+        inset: 35% 0 0;
+        background: linear-gradient(transparent, rgba(15, 39, 27, 0.72));
+      }
+      .portrait-card img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 44%;
+      }
+      .portrait-label {
+        position: absolute;
+        z-index: 1;
+        left: 24px;
+        bottom: 25px;
+        color: white;
+        font:
+          400 20px Georgia,
+          serif;
+      }
+      .portrait-label small {
+        display: block;
+        margin-top: 6px;
+        color: rgba(255, 255, 255, 0.78);
+        font:
+          10px Inter,
+          system-ui,
+          sans-serif;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .image-caption {
+        position: absolute;
+        right: -1%;
+        bottom: 10%;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 12px 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 999px;
+        background: rgba(22, 52, 38, 0.78);
+        backdrop-filter: blur(10px);
+        color: rgba(255, 253, 247, 0.9);
+        font-size: 10px;
+        letter-spacing: 0.05em;
+      }
+      .image-caption b {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 12px var(--gold);
+      }
+      .floating-note {
+        position: absolute;
+        top: 15%;
+        left: 0;
+        max-width: 185px;
+        padding: 14px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 15px 40px rgba(5, 23, 15, 0.2);
+        color: var(--forest);
+        font:
+          13px/1.45 Georgia,
+          serif;
+        transform: rotate(-4deg);
+      }
+      .floating-note span {
+        display: block;
+        margin-bottom: 5px;
+        color: #738366;
+        font:
+          9px Inter,
+          system-ui,
+          sans-serif;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .below {
+        padding: 88px 24px 100px;
+        text-align: center;
+        background: var(--paper);
+      }
+      .below .eyebrow {
+        color: #655c9e;
+      }
+      .below h2 {
+        max-width: 650px;
+        margin: 0 auto 16px;
+        font:
+          400 clamp(34px, 4.5vw, 52px)/1.1 Georgia,
+          serif;
+        letter-spacing: -0.035em;
+      }
+      .below p {
+        max-width: 530px;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.8;
+      }
+      .benefits {
+        padding: 5px 24px 96px;
+        background: var(--paper);
+      }
+      .benefit-grid {
+        width: min(1000px, 100%);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .benefit-card {
+        padding: 25px 24px 26px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: linear-gradient(145deg, #fff 0%, #f7f6ee 100%);
+      }
+      .benefit-icon {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 19px;
+        border-radius: 50%;
+        background: #eeeafb;
+        color: #5a4e92;
+        font-size: 18px;
+      }
+      .benefit-card h3 {
+        margin: 0 0 8px;
+        font:
+          400 20px Georgia,
+          serif;
+      }
+      .benefit-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.7;
+      }
+      .auth {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        width: min(930px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 24px 0 96px;
+        background: var(--paper);
+      }
+      .auth-card {
+        scroll-margin-top: 24px;
+        padding: 32px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 0 16px 42px rgba(28, 47, 35, 0.06);
+      }
+      .auth-card h3 {
+        margin: 0 0 7px;
+        font:
+          400 28px Georgia,
+          serif;
+      }
+      .auth-card > p {
+        margin: 0 0 22px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .field {
+        display: block;
+        margin: 15px 0;
+        color: #435448;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .field input,
+      .field select {
+        width: 100%;
+        margin-top: 8px;
+        padding: 13px 14px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fdfcf8;
+        color: var(--ink);
+        font: inherit;
+        font-weight: 400;
+      }
+      .field input:focus,
+      .field select:focus {
+        border-color: #7569b2;
+        outline: 3px solid rgba(117, 105, 178, 0.18);
+      }
+      .auth-card .button-primary {
+        width: 100%;
+        border: 0;
+        cursor: pointer;
+        font: inherit;
+        font-size: 13px;
+        margin-top: 4px;
+      }
+      .form-message {
+        min-height: 18px;
+        margin: 10px 0 0;
+        color: #42664e;
+        font-size: 12px;
+      }
+      footer {
+        padding: 23px 24px;
+        text-align: center;
+        color: rgba(255, 253, 247, 0.72);
+        background: var(--forest);
+        font-size: 11px;
+      }
+      @media (max-width: 760px) {
+        .site-header {
+          height: 74px;
+          width: calc(100% - 36px);
+        }
+        .menu-toggle {
+          display: grid;
+          place-items: center;
+        }
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 64px;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding: 10px;
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          border-radius: 16px;
+          background: #193b2c;
+          box-shadow: var(--shadow);
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        .nav-links a {
+          padding: 13px;
+        }
+        .nav-actions {
+          margin-left: auto;
+          margin-right: 12px;
+          gap: 15px;
+        }
+        .nav-cta {
+          padding: 10px 13px;
+        }
+        .hero {
+          width: calc(100% - 40px);
+          min-height: auto;
+          grid-template-columns: 1fr;
+          gap: 0;
+          padding: 67px 0 20px;
+        }
+        .hero-copy {
+          padding: 0;
+        }
+        h1 {
+          font-size: clamp(58px, 15vw, 82px);
+        }
+        .hero-copy > p {
+          font-size: 14px;
+          max-width: 390px;
+        }
+        .hero-note {
+          margin-top: 34px;
+        }
+        .visual {
+          min-height: 360px;
+          margin-top: 4px;
+        }
+        .visual {
+          min-height: 430px;
+        }
+        .portrait-card {
+          width: min(340px, 80%);
+          height: 400px;
+        }
+        .floating-note {
+          top: 10%;
+          left: -3px;
+        }
+        .image-caption {
+          right: -2px;
+          bottom: 6%;
+        }
+        .benefit-grid {
+          grid-template-columns: 1fr;
+          max-width: 460px;
+        }
+        .auth {
+          grid-template-columns: 1fr;
+          padding-top: 5px;
+        }
+      }
+      @media (max-width: 420px) {
+        .brand {
+          font-size: 22px;
+        }
+        .nav-actions {
+          gap: 10px;
+          font-size: 12px;
+        }
+        .nav-cta {
+          padding: 10px 11px;
+        }
+        .hero-buttons {
+          gap: 17px;
+        }
+        .button-primary {
+          padding: 14px 17px;
+        }
+        .text-link {
+          font-size: 12px;
+        }
+        .visual {
+          min-height: 360px;
+        }
+        .portrait-card {
+          height: 335px;
+        }
+        .floating-note {
+          max-width: 150px;
+          font-size: 12px;
+        }
+        .auth-card {
+          padding: 25px 21px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div class="hero-wrap" id="beranda">
+      <header class="site-header">
+        <a class="brand" href="#beranda" aria-label="Sylvara, beranda"
+          ><span class="brand-mark" aria-hidden="true"><span>✳</span></span
+          >Sylvara</a
+        >
+        <nav class="nav-links" id="main-nav" aria-label="Navigasi utama">
+          <a href="#beranda">Beranda</a>
+          <a href="#event">Tentang</a>
+          <a href="#divisi">Divisi</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="login-link" href="#masuk">Login</a>
+          <a class="nav-cta" href="#daftar">Daftar Panitia</a>
+        </div>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Buka menu"
+          aria-expanded="false"
+          aria-controls="main-nav"
+        >
+          ☰
+        </button>
+      </header>
+      <main class="hero">
+        <section class="hero-copy" aria-labelledby="headline">
+          <p class="eyebrow">Open recruitment • Event kampus</p>
+          <h1 id="headline">
+            Bikin event.<br />Bangun cerita.<br /><em>Mulai dari sini.</em>
+          </h1>
+          <p>
+            Punya ide, energi, atau sekadar ingin mencoba hal baru? Temukan tim
+            kepanitiaan yang cocok dan ciptakan momen kampus bareng Sylvara.
+          </p>
+          <div class="hero-buttons">
+            <a class="button-primary" href="#daftar"
+              >Cari posisi untukku <span aria-hidden="true">&nbsp;↗</span></a
+            >
+            <a class="text-link" href="#divisi"
+              >Lihat divisi <span aria-hidden="true">→</span></a
+            >
+          </div>
+          <div class="hero-note">
+            <span class="note-dots" aria-hidden="true"
+              ><i></i><i></i><i></i></span
+            ><span>Temukan teman satu visi dan pengalaman baru</span>
+          </div>
+        </section>
+        <div class="visual">
+          <div class="portrait-card">
+            <img
+              src="https://www.uni-hildesheim.de/media/_processed_/a/9/csm_P1050881-1_Campusfest_2016_Studentisches_Organisationsteam_Uni_Hildesheim_Foto_Isa_Lange-s_01_5d3feb7fd7.jpg"
+              alt="Tim mahasiswa berdiskusi dan bekerja sama mempersiapkan festival kampus"
+              fetchpriority="high"
+            />
+            <div class="portrait-label">
+              Di balik serunya event<small>Ada tim hebat sepertimu.</small>
+            </div>
+          </div>
+          <div class="floating-note">
+            <span>Open recruitment</span>Tempatmu di tim berikutnya dimulai di
+            sini.
+          </div>
+          <div class="image-caption"><b></b> CAMPUS FEST • OPEN FOR YOU</div>
+        </div>
+      </main>
+    </div>
+    <section class="below" id="event">
+      <p class="eyebrow">Bukan cuma jadi penonton</p>
+      <h2>Event terbaik kampus dimulai dari orang-orang di baliknya.</h2>
+      <p>
+        Gabung ke kepanitiaan, coba peran baru, dan bikin sesuatu yang bakal
+        dikenang bareng teman-teman kampusmu.
+      </p>
+    </section>
+    <section
+      class="benefits"
+      id="divisi"
+      aria-label="Divisi kepanitiaan yang tersedia"
+    >
+      <div class="benefit-grid">
+        <article class="benefit-card">
+          <span class="benefit-icon" aria-hidden="true">✦</span>
+          <h3>Kreatif & Publikasi</h3>
+          <p>
+            Rancang konsep visual, konten, dan cerita yang bikin orang tertarik
+            datang.
+          </p>
+        </article>
+        <article class="benefit-card">
+          <span class="benefit-icon" aria-hidden="true">⌁</span>
+          <h3>Acara & Operasional</h3>
+          <p>
+            Atur jalannya acara, koordinasi lapangan, dan pastikan semua momen
+            lancar.
+          </p>
+        </article>
+        <article class="benefit-card">
+          <span class="benefit-icon" aria-hidden="true">❋</span>
+          <h3>Relasi & Sponsorship</h3>
+          <p>
+            Bangun koneksi, kerja sama, dan dukungan untuk mewujudkan ide besar.
+          </p>
+        </article>
+      </div>
+    </section>
+    <section class="auth" aria-label="Form akun">
+      <form class="auth-card" id="masuk-form">
+        <h3 id="masuk">Balik lagi?</h3>
+        <p>Masuk untuk lanjutkan pendaftaranmu.</p>
+        <label class="field"
+          >Email<input
+            type="email"
+            name="email"
+            placeholder="nama@email.com"
+            autocomplete="email"
+            required
+        /></label>
+        <label class="field"
+          >Kata sandi<input
+            type="password"
+            name="password"
+            placeholder="Masukkan kata sandi"
+            autocomplete="current-password"
+            required
+        /></label>
+        <button class="button-primary" type="submit">Login</button>
+        <p class="form-message" aria-live="polite"></p>
+      </form>
+      <form class="auth-card" id="daftar-form">
+        <h3 id="daftar">Gabung jadi panitia</h3>
+        <p>Kenalan dulu, lalu pilih divisi yang paling cocok buatmu.</p>
+        <label class="field"
+          >Nama<input
+            type="text"
+            name="name"
+            placeholder="Nama lengkap"
+            autocomplete="name"
+            required
+        /></label>
+        <label class="field"
+          >Email<input
+            type="email"
+            name="email"
+            placeholder="nama@email.com"
+            autocomplete="email"
+            required
+        /></label>
+        <label class="field"
+          >Divisi pilihan<select name="division" required>
+            <option value="" disabled selected>Pilih divisi</option>
+            <option>Kreatif & Publikasi</option>
+            <option>Acara & Operasional</option>
+            <option>Relasi & Sponsorship</option>
+          </select></label
+        >
+        <label class="field"
+          >Kata sandi<input
+            type="password"
+            name="password"
+            placeholder="Minimal 8 karakter"
+            minlength="8"
+            autocomplete="new-password"
+            required
+        /></label>
+        <button class="button-primary" type="submit">Mulai pendaftaran</button>
+        <p class="form-message" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Sylvara. Temukan timmu. Ciptakan momennya.
+    </footer>
+
+    <script>
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector(".nav-links");
+      toggle.addEventListener("click", () => {
+        const isOpen = nav.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+        toggle.setAttribute("aria-label", isOpen ? "Tutup menu" : "Buka menu");
+        toggle.textContent = isOpen ? "×" : "☰";
+      });
+      nav.querySelectorAll("a").forEach((link) =>
+        link.addEventListener("click", () => {
+          nav.classList.remove("open");
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-label", "Buka menu");
+          toggle.textContent = "☰";
+        }),
+      );
+      document.querySelectorAll(".auth-card").forEach((form) =>
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const message = form.querySelector(".form-message");
+          message.textContent =
+            form.id === "masuk-form"
+              ? "Contoh siap! Hubungkan form ini ke sistem login aplikasi."
+              : "Contoh siap! Hubungkan form ini ke sistem pendaftaran panitia.";
+        }),
+      );
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

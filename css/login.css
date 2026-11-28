@@ -4,7 +4,8 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 1.5rem;
-  background: var(--frosted-mint);
+  background: var(--ink);
+  min-height: 100vh;
 }
 
 .login-kartu {
@@ -24,8 +25,8 @@
   flex-direction: column;
   justify-content: center;
   padding: 3rem 2.5rem;
-  background: var(--dusty-olive);
-  color: #fff;
+  background: var(--dark-graphite);
+  color: var(--jasmine);
 }
 .login-sisi h2 {
   font-size: 1.9rem;
@@ -103,8 +104,8 @@
 .btn-submit {
   width: 100%;
   padding: 0.8rem;
-  background: var(--dusty-olive);
-  color: #fff;
+  background: var(--dark-graphite);
+  color: var(--jasmine);
   border: none;
   border-radius: 6px;
   font-size: 1rem;
@@ -112,7 +113,7 @@
   cursor: pointer;
   margin-top: 0.75rem;
 }
-.btn-submit:hover { background: var(--palm-leaf); }
+.btn-submit:hover { background: #427F2F; }
 
 .pindah {
   text-align: center;

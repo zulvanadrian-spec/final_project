@@ -4,13 +4,10 @@
   align-items: center;
   height: 64px;
   padding: 0 2rem  0 0;
-  background: var(--tea-green);
-
   position: sticky;
   top: 0;
   z-index: 100;
 }
-
 .logo {
   display: flex;
   align-items: center;
@@ -21,9 +18,10 @@
   color: var(--teks-gelap);
 }
 .logo img {
+  margin-top: 10px;
   margin-left: 15px;
-  margin-bottom: 10px;
-  height: 50px;
+  margin-bottom: 5px;
+  height: 150px;
 }
 
 .auth {
@@ -36,29 +34,29 @@
 .btn-daftar {
   text-decoration: none;
   padding: 0.5rem 1rem;
-  border-radius: 6px;
+  border-radius: 50px;
   font-size: 0.95rem;
+  background-color: var(--gold);
 }
 
 .btn-login {
-  color: var(--teks-gelap);
-  border: 1px solid var(--dusty-olive);
+  border-radius: 50px;
+  color: white;
+  border: 1px solid var(--gold);
 }
-.btn-login:hover { background: var(--muted-olive); }
+.btn-login:hover { background: var(--gold-gelap); }
 
 .btn-daftar {
-  background: var(--dusty-olive);
+  border-radius: 50px;
+  background-color: var(--line);
   color: #fff;
-  border: 1px solid var(--dusty-olive);
+  border: 1px solid var(--gold);
 }
-.btn-daftar:hover { background: var(--palm-leaf); }
+.btn-daftar:hover { background: var(--forest-light); }
 
 .hero {
   width: 100%;
   min-height: 80vh;
-  background-image:
-   linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-  url("../images/group.jpeg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -70,14 +68,14 @@
 .hero-isi {
   max-width: 650px;             /* batas lebar teks */
   text-align: left;
-  color: #fff;
+  color: var(--putih-tulang);
 }
 
 .hero-isi h1 {
   font-size: 3.5rem;
   line-height: 1.15;
   margin-bottom: 1.25rem;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 8px rgba(100, 98, 98, 0.5);
 }
 
 .hero-isi p {
@@ -85,19 +83,19 @@
   line-height: 1.6;
   color: var(--frosted-mint);
   margin-bottom: 2rem;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 8px rgba(108, 108, 108, 0.5);
 }
 
 .btn-hero {
   display: inline-block;
   padding: 1rem 2rem;
-  background: var(--dusty-olive);
-  color: #fff;
+  background: var(--gold);
+  color: rgb(255, 255, 255);
   text-decoration: none;
   border-radius: 150px;           /* kecil = kotak, seperti di contoh */
   font-weight: bold;
 }
-.btn-hero:hover { background: var(--palm-leaf); }
+.btn-hero:hover { background: var(--gold-gelap); }
 
 
 .tentang {
@@ -121,28 +119,126 @@
   font-weight: bold;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--dusty-olive);
+  color: var(--putih-tulang);
   margin-bottom: 0.75rem;
 }
 
 .tentang-judul h2 {
   font-size: 2.2rem;
   line-height: 1.25;
-  color: var(--teks-gelap);
+  color: var(--cream);
 }
 
 .tentang-isi {
   flex: 1;
   padding-left: 2rem;
-  border-left: 3px solid var(--muted-olive);
+  border-left: 3px solid var(--cream);
 }
 
 .tentang-isi p {
   line-height: 1.8;
-  color: var(--teks-gelap);
+  color: var(--cream);
   margin-bottom: 1rem;
 }
 .tentang-isi p:last-child { margin-bottom: 0; }
+
+.section-divisi {
+    padding: 80px 24px;
+    background-color: #FAF9F6; /* Putih tulang lembut */
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.divisi-header {
+    max-width: 680px;
+    margin: 0 auto 48px auto;
+    text-align: center;
+}
+
+.divisi-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #5C529C; /* Ungu lembut seperti di gambar */
+    margin-bottom: 14px;
+}
+
+.divisi-eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 1.5px;
+    background-color: #8C82C8;
+}
+
+.divisi-title {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 2.85rem);
+    font-weight: 500;
+    line-height: 1.15;
+    color: #161822;
+    margin: 0 0 16px 0;
+}
+
+.divisi-subtitle {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: #6B7280;
+    margin: 0;
+}
+
+/* Grid Kartu: 3 kolom di desktop, otomatis turun ke 1 kolom di HP */
+.divisi-grid {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 20px;
+}
+
+.divisi-card {
+    background-color: #F6F5EE; /* Putih tulang kartu yang kontras halus */
+    border: 1px solid #E5E3D8;
+    border-radius: 18px;
+    padding: 28px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.divisi-card:hover {
+    transform: translateY(-4px);
+    border-color: #C7C2E6;
+    box-shadow: 0 12px 28px rgba(45, 42, 74, 0.06);
+}
+
+.divisi-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #EAE7F8; /* Lingkaran ungu pastel */
+    color: #5C529C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.divisi-card h3 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.38rem;
+    font-weight: 600;
+    color: #161822;
+    margin: 0 0 8px 0;
+}
+
+.divisi-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #6B7280;
+    margin: 0;
+}
 
 @media (max-width: 768px) {
   .tentang { padding: 3rem 1.5rem; }

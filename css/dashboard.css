@@ -12,6 +12,10 @@
   color: var(--nav-text);
   font-family: 'Plus Jakarta Sans', Arial, sans-serif;
 }
+
+.img-logo-mhs{
+  padding: 40px;
+}
  
 .navbar a { color: inherit; text-decoration: none; }
  

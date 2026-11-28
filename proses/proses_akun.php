@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../autoload.php';
 
+use pbo_FP\Core\Database;
 use pbo_FP\Models\Admin;
 use pbo_FP\Core\Mailer;
 
@@ -34,10 +35,31 @@ if ($aksi === 'putuskan_pengajuan') {
         kembali('error', 'Alasan penolakan wajib diisi.');
     }
 
+    $db = Database::getConnection();
+
+    // Ambil nama file berkas sebelum status diputuskan
+    $berkasLama = null;
+    if ($keputusan === 'ditolak') {
+        $stmtBerkas = $db->prepare("SELECT berkas FROM pengajuan_rekruter WHERE id_pengajuan = ?");
+        $stmtBerkas->execute([$id_pengajuan]);
+        $berkasLama = $stmtBerkas->fetchColumn();
+    }
+
     $catatanSimpan = $catatan !== '' ? $catatan : null;
     $calon = Admin::putuskanPengajuan($id_pengajuan, $keputusan, $catatanSimpan);
 
     if ($calon) {
+        // Hapus file fisik di folder uploads/ & kosongkan kolom berkas jika ditolak
+        if ($keputusan === 'ditolak' && !empty($berkasLama)) {
+            $pathFile = __DIR__ . '/../uploads/' . basename($berkasLama);
+            if (is_file($pathFile)) {
+                @unlink($pathFile);
+            }
+
+            $stmtKosongkan = $db->prepare("UPDATE pengajuan_rekruter SET berkas = NULL WHERE id_pengajuan = ?");
+            $stmtKosongkan->execute([$id_pengajuan]);
+        }
+
         $pesan = 'Pengajuan akun ' . $calon['nama_user'] . ' berhasil ' . $keputusan . '.';
 
         try {
